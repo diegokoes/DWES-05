@@ -1,8 +1,6 @@
-# DWES-05-2024-25
-Programación web con Spring Framework &amp; Spring Boot
+# Programación web con Spring Framework &amp; Spring Boot
 
 <img src="https://github.com/user-attachments/assets/c781caf9-4052-4b11-b5bd-d8b34b53b106" height="200px"/>
-
 
 ## Primeros pasos
 ### Primera aplicación Spring "Hola Mundo"
