@@ -19,7 +19,8 @@ src/
  │    │         ├── controller/           // Controladores REST
  │    │         ├── service/              // Lógica de negocio
  │    │         ├── repository/           // Acceso a la base de datos
- │    │         ├── model/                // Entidades (JPA, DTOs, etc.)
+ │    │         ├── model/                // Clases del modelo de datos 
+ │    │         ├── entity/               // Entidades JPA
  │    │         └── config/               // Configuración personalizada
  │    └── resources/
  │         ├── application.properties     // Configuración principal de Spring Boot
