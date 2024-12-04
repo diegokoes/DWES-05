@@ -33,7 +33,7 @@ src/
 
 ```
 
-#### Componentes principales
+#### COMPONENTES PRINCIPALES
 
 **Clase principal:** es la clase que arranca la aplicación Spring Boot. Tiene la anotación @SpringBootApplication
 
@@ -59,7 +59,11 @@ src/
 
 ![image](https://github.com/user-attachments/assets/c022a1e1-6d0f-491c-9e6e-ba80d6f282ed)
 
-#### Archivos de configuración 
+
+![image](https://github.com/user-attachments/assets/d7ac9301-1966-498f-b6f9-4afa004c31fe)
+
+
+#### ARCHIVOS DE CONFIGURACIÓN
 
 **application.properties o application.yml:** Contienen la configuración de la aplicación, como:
 - Configuración del servidor (server.port=8081)
