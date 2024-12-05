@@ -11,37 +11,53 @@ Aprenderemos a:
 - Crear el controlador Rest.
 - Realizar operaciones CRUD.
 
-Sigue las intruscciones del profesor
+Sigue las intruscciones del profesor...
 
 # EJERCICIO 2: Implementar aplicación Spring MVC + Thymeleaf + CRUD de productos
 
-Partimos de los endpoints REST para realizar las operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
+Utilizaremos los endpoints REST para realizar las operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
 
 Vamos a crear un nuevo proyecto llamado **primerMVC** que reutilizará el API Rest creado en el ejercicio anterior.
 
-Vamos a aprender a conectar el frontend (Thymeleaf) con esos endpoints para que puedas hacer uso de ellos en el navegador, en lugar de interactuar con la API REST de forma aislada.
+Vamos a aprender a conectar el **frontend (Thymeleaf)** con esos endpoints para que puedas hacer uso de ellos en el navegador, en lugar de interactuar con la API REST de forma aislada.
 
-## Cambios a realizar
+## Pasos a realizar
 
-- Modificar el controlador MVC para que haga uso de los endpoints REST que ya tienes.
-- Actualizar las vistas Thymeleaf para realizar las operaciones CRUD mediante formularios y enlaces.
+- Implementar el controlador MVC para que haga uso de los endpoints REST que ya tienes.
+- Crear las vistas Thymeleaf para realizar las operaciones CRUD mediante formularios y enlaces (en resources/templates).
 - Configurar la conexión entre el controlador MVC y el servicio REST.
 
 
 ## 1. Modificar el controlador MVC
 
-El controlador MVC (ProductoController.java) debe ser modificado para realizar peticiones HTTP a tu API REST y procesar las respuestas. 
+El controlador MVC (ProductoController.java) realizará las peticiones HTTP a tu API REST y procesará las respuestas. 
 
-Vamos a añadir RestTemplate a una nueva clase de configuración en @Configuration.
+Vamos a añadir **RestTemplate** a una nueva clase de configuración **@Configuration**.
 
 - El API REST ya maneja el CRUD de productos.
 - El controlador MVC realiza peticiones HTTP a tu API REST usando RestTemplate para realizar las operaciones CRUD.
 - Las vistas Thymeleaf permiten interactuar con el controlador y visualizar la lista de productos, crear nuevos, editar y eliminar productos.
 
-## 2. Actualizar las vistas Thymeleaf
-Con el controlador MVC ajustado para interactuar con tu API REST, ahora necesitamos ajustar las vistas de Thymeleaf para que puedas ver y manejar los productos.
+El proyecto quedará de la siguiente manera:
 
-Crea **list.html** en resoruces/templates:
+```
+src/main/java/es/daw/primermvc
+    ├── controller
+    │      └── ProductoController.java
+    ├── model
+    │      └── Producto.java
+    ├── config
+    │      └── AppConfig.java
+    └── PrimermvcApplication.java
+
+``` 
+
+## 2. Actualizar las vistas Thymeleaf
+Con el controlador MVC que interactúa a través de RestTemplate con tu API REST, ahora necesitamos ajustar las vistas de Thymeleaf para que puedas ver y manejar los productos.
+
+### 2.1. Listar productos
+
+Crea **list.html en resources/templates**:
 
 ```
 <!DOCTYPE html>
@@ -70,5 +86,7 @@ Crea **list.html** en resoruces/templates:
 </body>
 </html>
 ```
+
+Ejecuta el proyecto: http://localhost:8081/productos
 
 Chuleta Thymeleaf: https://github.com/profeMelola/DWES-05-2024-25/blob/main/APOYO_TEORIA/Thymeleaf.md
