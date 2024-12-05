@@ -37,3 +37,37 @@ Vamos a añadir RestTemplate a una nueva clase de configuración en @Configurati
 - El API REST ya maneja el CRUD de productos.
 - El controlador MVC realiza peticiones HTTP a tu API REST usando RestTemplate para realizar las operaciones CRUD.
 - Las vistas Thymeleaf permiten interactuar con el controlador y visualizar la lista de productos, crear nuevos, editar y eliminar productos.
+
+## 2. Actualizar las vistas Thymeleaf
+Con el controlador MVC ajustado para interactuar con tu API REST, ahora necesitamos ajustar las vistas de Thymeleaf para que puedas ver y manejar los productos.
+
+Crea **list.html** en resoruces/templates:
+
+```
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Productos</title>
+</head>
+<body>
+<h1>Lista de Productos</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>SKU</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="producto : ${productos}">
+        <td th:text="${producto.nombre}"></td>
+        <td th:text="${producto.precio}"></td>
+        <td th:text="${producto.sku}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
+```
