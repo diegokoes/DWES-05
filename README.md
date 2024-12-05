@@ -8,7 +8,7 @@
 
 https://www.arquitecturajava.com/spring-boot-que-es/
 
-#### Estructura básica de un proyecto Spring
+### Estructura básica de un proyecto Spring
 
 ```
 src/
@@ -33,7 +33,7 @@ src/
 
 ```
 
-#### COMPONENTES PRINCIPALES
+### COMPONENTES PRINCIPALES
 
 **Clase principal:** es la clase que arranca la aplicación Spring Boot. Tiene la anotación @SpringBootApplication
 
@@ -59,12 +59,12 @@ src/
 
 ![image](https://github.com/user-attachments/assets/c022a1e1-6d0f-491c-9e6e-ba80d6f282ed)
 
-#### TIPOS DE CONTROLADORES
+### TIPOS DE CONTROLADORES
 
 ![image](https://github.com/user-attachments/assets/d7ac9301-1966-498f-b6f9-4afa004c31fe)
 
 
-#### ARCHIVOS DE CONFIGURACIÓN
+### ARCHIVOS DE CONFIGURACIÓN
 
 **application.properties o application.yml:** Contienen la configuración de la aplicación, como:
 - Configuración del servidor (server.port=8081)
@@ -75,13 +75,14 @@ src/
 
 ![image](https://github.com/user-attachments/assets/e1da308e-5a09-49ff-91de-3fe6c402c9d6)
 
-#### Pruebas (test/)
+### Pruebas (test/)
 
 Incluyen pruebas unitarias (usualmente con JUnit y Mockito) y de integración.
 
 ![image](https://github.com/user-attachments/assets/52e9140c-1f43-48eb-b3b7-32b4ae6047e9)
 
 
+## Primeras aplicaciones
 
 ### Primera aplicación Spring "Hola Mundo"
 https://www.jetbrains.com/help/idea/your-first-spring-application.html
