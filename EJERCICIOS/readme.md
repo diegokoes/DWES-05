@@ -57,7 +57,6 @@ Crea **list.html** en resoruces/templates:
         <th>Nombre</th>
         <th>Precio</th>
         <th>SKU</th>
-        <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
