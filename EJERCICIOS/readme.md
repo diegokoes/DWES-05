@@ -70,3 +70,5 @@ Crea **list.html** en resoruces/templates:
 </body>
 </html>
 ```
+
+Chuleta Thymeleaf: https://github.com/profeMelola/DWES-05-2024-25/blob/main/APOYO_TEORIA/Thymeleaf.md
