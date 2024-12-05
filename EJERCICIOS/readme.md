@@ -17,7 +17,7 @@ Sigue las intruscciones del profesor
 
 Partimos de los endpoints REST para realizar las operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
 
-Vamos a partir del proyecto anterior. Renombra el proyecto como **primerMVC**.
+Vamos a crear un nuevo proyecto llamado **primerMVC** que reutilizará el API Rest creado en el ejercicio anterior.
 
 Vamos a aprender a conectar el frontend (Thymeleaf) con esos endpoints para que puedas hacer uso de ellos en el navegador, en lugar de interactuar con la API REST de forma aislada.
 
