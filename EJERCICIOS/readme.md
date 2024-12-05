@@ -1,6 +1,8 @@
-# RestController: CRUD de productos
+# EJERCICIO 1: RestController, CRUD de productos
 
 Vamos a partir de la base de datos H2 usada en la práctica de la primera evaluación **tienda_practica.mv.db**
+
+Llama a tu proyecto **primerCrud**.
 
 Aprenderemos a:
 - Configurar el acceso a la base de datos (no trabajaremos en memoria).
@@ -11,9 +13,11 @@ Aprenderemos a:
 
 Sigue las intruscciones del profesor
 
-# Implementar aplicación Spring MVC + Thymeleaf + CRUD de productos
+# EJERCICIO 2: Implementar aplicación Spring MVC + Thymeleaf + CRUD de productos
 
 Partimos de los endpoints REST para realizar las operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
+
+Vamos a partir del proyecto anterior. Renombra el proyecto como **primerMVC**.
 
 Vamos a aprender a conectar el frontend (Thymeleaf) con esos endpoints para que puedas hacer uso de ellos en el navegador, en lugar de interactuar con la API REST de forma aislada.
 
