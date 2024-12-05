@@ -59,6 +59,7 @@ src/
 
 ![image](https://github.com/user-attachments/assets/c022a1e1-6d0f-491c-9e6e-ba80d6f282ed)
 
+#### TIPOS DE CONTROLADORES
 
 ![image](https://github.com/user-attachments/assets/d7ac9301-1966-498f-b6f9-4afa004c31fe)
 
