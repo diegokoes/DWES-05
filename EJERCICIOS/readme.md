@@ -28,17 +28,39 @@ Vamos a aprender a conectar el **frontend (Thymeleaf)** con esos endpoints para 
 - Configurar la conexión entre el controlador MVC y el servicio REST.
 
 
-## 1. Modificar el controlador MVC
+## 1. Implementar el controlador MVC
 
 El controlador MVC (ProductoController.java) realizará las peticiones HTTP a tu API REST y procesará las respuestas. 
 
-Vamos a añadir **RestTemplate** a una nueva clase de configuración **@Configuration**.
+Vamos a añadir **RestTemplate** a una nueva clase de configuración **@Configuration**. 
+
+En Spring, el objeto RestTemplate debe ser gestionado por el contenedor de Spring para que pueda ser inyectado con @Autowired.
+
+Esto se hace declarando un Bean de RestTemplate en tu configuración de Spring.
+
+Esto le indica a Spring que debe crear y gestionar una instancia de RestTemplate, que luego estará disponible para ser inyectada.
+
+Crea la calse **AppConfig** en el paquete config de tu proyecto:
+
+
+```
+@Configuration
+public class AppConfig {
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+}
+```
+
+**Ten en cuenta que:**
 
 - El API REST ya maneja el CRUD de productos.
 - El controlador MVC realiza peticiones HTTP a tu API REST usando RestTemplate para realizar las operaciones CRUD.
 - Las vistas Thymeleaf permiten interactuar con el controlador y visualizar la lista de productos, crear nuevos, editar y eliminar productos.
 
-El proyecto quedará de la siguiente manera:
+**El proyecto quedará de la siguiente manera:**
 
 ```
 src/main/java/es/daw/primermvc
