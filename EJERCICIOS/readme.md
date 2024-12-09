@@ -118,3 +118,10 @@ Crea **list.html en resources/templates**:
 Ejecuta el proyecto: http://localhost:8081/productos
 
 Chuleta Thymeleaf: https://github.com/profeMelola/DWES-05-2024-25/blob/main/APOYO_TEORIA/Thymeleaf.md
+
+### 2.2. Editar producto
+
+### 2.3. Borrar producto
+
+### 2.4. Crear nuevo producto
+
