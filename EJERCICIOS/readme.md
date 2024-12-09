@@ -19,6 +19,12 @@ Utilizaremos los endpoints REST para realizar las operaciones CRUD (Crear, Leer,
 
 Vamos a crear un nuevo proyecto llamado **primerMVC** que reutilizará el API Rest creado en el ejercicio anterior.
 
+**Configura este proyecto para que se ejecute en el puerto 8081. Para ello edita application.properties y añade:**
+
+```
+server.port=8081
+```
+
 Vamos a aprender a conectar el **frontend (Thymeleaf)** con esos endpoints para que puedas hacer uso de ellos en el navegador, en lugar de interactuar con la API REST de forma aislada.
 
 ## Pasos a realizar
