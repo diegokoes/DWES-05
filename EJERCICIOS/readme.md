@@ -11,7 +11,7 @@ Aprenderemos a:
 - Crear el controlador Rest.
 - Realizar operaciones CRUD.
 
-Sigue las intruscciones del profesor...
+Sigue las instrucciones del profesor...
 
 # EJERCICIO 2: Implementar aplicación Spring MVC + Thymeleaf + CRUD de productos
 
