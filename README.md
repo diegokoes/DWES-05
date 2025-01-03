@@ -6,6 +6,8 @@
 
 ### Spring Boot ¿Qué es y cómo funciona?
 
+Spring Boot es una herramienta dentro del framework Spring.
+
 https://www.arquitecturajava.com/spring-boot-que-es/
 
 ### Estructura básica de un proyecto Spring
