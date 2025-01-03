@@ -10,6 +10,13 @@ Spring Boot es una herramienta dentro del framework Spring.
 
 https://www.arquitecturajava.com/spring-boot-que-es/
 
+### Spring Platform
+
+Es un conjunto de proyectos open source desarrollados en Java con el objetivo de agilizar el proceso de desarrollo de aplicaciones.
+
+Cuenta con cantidad de herramientas (tecnologías) que tienen como objetivo facilitar el trabajo de los desarrolladores.
+
+
 ### Estructura básica de un proyecto Spring
 
 ```
