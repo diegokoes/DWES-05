@@ -8,6 +8,10 @@
 
 Spring Boot es una herramienta dentro del framework Spring.
 
+Es una extensión del framework Spring que tiene como finalidad simplificar la creación y configuración inicial de aplicaciones web.
+
+Solo necesita una configuración básica, que permite el uso de librerías, integración con otras herramientas o incluso otros proyectos Spring.
+
 ![image](https://github.com/user-attachments/assets/2863589f-78b7-45d9-b424-31ce666c08af)
 
 *Referencias: https://www.youtube.com/watch?v=8X2acANBuLk&t=857s , https://www.arquitecturajava.com/spring-boot-que-es/*
