@@ -55,7 +55,6 @@ En el segundo se usa directamente y de forma nativa HttpServletRequest:
 
     }
 ```
-En la forma nativa:
 
 ¿Y si no pasamos algún parámetro del request? ¿Y si pasamos un parámetro con un valor que no se puede convertir a numérico?
 
