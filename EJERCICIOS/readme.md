@@ -18,7 +18,7 @@ Sigue las instrucciones del profesor...
 
 **Recuerda!!!!**
 
-- El MVC es un pat´ron de diseño del software que permite uan separción entre la lógica de negocio de una aplicación y la vista que se le presenta al usuario.
+- El MVC es un patrón de diseño del software que permite uan separción entre la lógica de negocio de una aplicación y la vista que se le presenta al usuario.
 - Utiliza como intermediario a un controlador que se encarga de tomar la decisión de cómo interactúan la vista y el modelo entre si.
 
 Utilizaremos los endpoints REST para realizar las operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
