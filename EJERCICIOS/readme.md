@@ -29,7 +29,8 @@ Pasos a realizar:
 
 Usar MapStruct para mapear entre una entidad y un DTO es una práctica muy eficiente, ya que automatiza la conversión y elimina la necesidad de escribir código repetitivo. 
 
-Pasos:
+### Pasos:
+
 - Agregar la dependencia al proyecto.
 - Crear el Mapper:
   ```
