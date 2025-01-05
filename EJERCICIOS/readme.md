@@ -13,7 +13,7 @@ Aprenderemos a:
 
 Sigue las instrucciones del profesor...
 
-# EJERCICIO 1.1: mejorar el ejercicio 1 usando ProductoDTO
+## Ampliación 1: mejorar el ejercicio 1 usando ProductoDTO
 
 Después de haber aprendido la utilidad de un DTO (revisar la teoría en el aula virtual de la UT05, "DTO - Data Transfer Object") vamos a crear un DTO adecuado para la entidad Producto.
 
@@ -24,7 +24,38 @@ Pasos a realizar:
 - Diseña la clase **ProductoDTO**.
 - Mapea la entidad producto con el dto. Implementa una clase @Service adecuada.
 - Modifica el API Rest de productos para usar ProductoDTO en lugar de directamente el Entity.
-  
+
+## Ampliación 2: uso nativo de HttpServletRequest
+
+Observa el siguiente código donde hay dos métodos para crear un producto en la base de datos.
+
+En el segundo se usa directamente y de forma nativa HttpServletRequest:
+
+```
+    @PostMapping("/add")
+    public String add(@RequestParam String nombre, @RequestParam int precio, @RequestParam String sku) {
+        Producto producto = new Producto();
+        producto.setNombre(nombre);
+        producto.setPrecio(precio);
+        producto.setSku(sku);
+        productoRepository.save(producto);
+        return "Added new product to repo!";
+    }
+
+    @PostMapping("/add-nativo")
+    public String add(HttpServletRequest request) {
+        ProductoDTO productoDTO = new ProductoDTO();
+        productoDTO.setNombre(request.getParameter("nombre"));
+        productoDTO.setSku(request.getParameter("sku"));
+        productoDTO.setPrecio(Integer.parseInt(request.getParameter("precio")));
+
+        productoService.convert2Producto(productoDTO).ifPresent(producto -> productoRepository.save(producto));
+
+        return "Added new product to repo!";
+
+    }
+```
+
 ## Librería MapStruct
 
 Usar MapStruct para mapear entre una entidad y un DTO es una práctica muy eficiente, ya que automatiza la conversión y elimina la necesidad de escribir código repetitivo. 
