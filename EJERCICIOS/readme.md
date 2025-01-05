@@ -13,6 +13,57 @@ Aprenderemos a:
 
 Sigue las instrucciones del profesor...
 
+# EJERCICIO 1.1: mejorar el ejercicio 1 usando ProductoDTO
+
+Después de haber aprendido la utilidad de un DTO (revisar la teoría en el aula virtual de la UT05, "DTO - Data Transfer Object") vamos a crear un DTO adecuado para la entidad Producto.
+
+Los atributos necesarios a transmitir serán el nombre, precio y sku.
+
+Pasos a realizar:
+
+- Diseña la clase **ProductoDTO**.
+- Mapea la entidad producto con el dto. Implementa una clase @Service adecuada.
+- Modifica el API Rest de productos para usar ProductoDTO en lugar de directamente el Entity.
+  
+## Librería MapStruct
+
+Usar MapStruct para mapear entre una entidad y un DTO es una práctica muy eficiente, ya que automatiza la conversión y elimina la necesidad de escribir código repetitivo. 
+
+Pasos:
+- Agregar la dependencia al proyecto.
+- Crear el Mapper:
+  ```
+    import org.mapstruct.Mapper;
+    import org.mapstruct.Mapping;
+    import org.mapstruct.factory.Mappers;
+
+    @Mapper
+    public interface ProductoMapper {
+        ProductoMapper INSTANCE = Mappers.getMapper(ProductoMapper.class);
+
+        // Mapea la entidad Producto al DTO ProductoDTO
+        @Mapping(source = "sku", target = "codigo")
+        ProductoDTO toProductoDTO(Producto producto);
+
+        // Mapea el DTO ProductoDTO a la entidad Producto
+       @Mapping(source = "codigo", target = "sku")
+        Producto toProducto(ProductoDTO productoDTO);
+    }
+
+  ```
+- Usar el Mapper:
+    ```
+        ....
+        List<Producto> productos = productoRepository.findAll();
+    
+        //Usar MapStruct para convertir la lista de productos
+        return productos.stream()
+                .map(ProductoMapper.INSTANCE::toProductoDTO)
+                .collect(Collectors.toList());
+
+        ... 
+    ```
+  
 
 # EJERCICIO 2: Implementar aplicación Spring MVC + Thymeleaf + CRUD de productos
 
