@@ -55,12 +55,13 @@ En el segundo se usa directamente y de forma nativa HttpServletRequest:
 
     }
 ```
-## Ampliación 3: controlar excepciones
+En la forma nativa:
 
 ¿Y si no pasamos algún parámetro del request? ¿Y si pasamos un parámetro con un valor que no se puede convertir a numérico?
 
+Observa que con @RequestParam obtienes directamente el precio de tipo entero y no es necesario hacer un Integer.parseInt que fallará si llega a null o el valor no es convertible a numérico.
 
-## Ampliación 4: uso de la librería MapStruct
+## Ampliación 3: uso de la librería MapStruct
 
 Usar MapStruct para mapear entre una entidad y un DTO es una práctica muy eficiente, ya que automatiza la conversión y elimina la necesidad de escribir código repetitivo. 
 
