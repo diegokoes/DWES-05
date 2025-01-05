@@ -21,7 +21,7 @@ Sigue las instrucciones del profesor...
 - El MVC es un patrón de diseño del software que permite una separción entre la lógica de negocio de una aplicación y la vista que se le presenta al usuario.
 - Utiliza como intermediario a un controlador (recibe las requests) que se encarga de tomar la decisión de cómo interactúan la vista (frontend) y el modelo entre si (nuestras clases java).
 
-Utilizaremos los endpoints REST para realizar las operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
+Utilizaremos los endpoints REST, del ejercicio 1,para realizar las operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
 
 Vamos a crear un nuevo proyecto llamado **primerMVC** que reutilizará el API Rest creado en el ejercicio anterior.
 
