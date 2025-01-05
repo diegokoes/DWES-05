@@ -56,7 +56,7 @@ En el segundo se usa directamente y de forma nativa HttpServletRequest:
     }
 ```
 
-## Librería MapStruct
+## Ampliación 3: uso de la librería MapStruct
 
 Usar MapStruct para mapear entre una entidad y un DTO es una práctica muy eficiente, ya que automatiza la conversión y elimina la necesidad de escribir código repetitivo. 
 
