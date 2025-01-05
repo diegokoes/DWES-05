@@ -1,4 +1,4 @@
-# EJERCICIO 1: RestController, CRUD de productos
+# EJERCICIO 1: RestController, CRUD de productos, MVC
 
 Vamos a partir de la base de datos H2 usada en la práctica de la primera evaluación **tienda_practica.mv.db**
 
@@ -13,7 +13,13 @@ Aprenderemos a:
 
 Sigue las instrucciones del profesor...
 
+
 # EJERCICIO 2: Implementar aplicación Spring MVC + Thymeleaf + CRUD de productos
+
+**Recuerda!!!!**
+
+- El MVC es un pat´ron de diseño del software que permite uan separción entre la lógica de negocio de una aplicación y la vista que se le presenta al usuario.
+- Utiliza como intermediario a un controlador que se encarga de tomar la decisión de cómo interactúan la vista y el modelo entre si.
 
 Utilizaremos los endpoints REST para realizar las operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
 
