@@ -196,6 +196,7 @@ Vamos a crear dos endpoints para realizar las pruebas y ver que obtenemos los va
     }
 
 ```
+Como mejora, vamos a cambiar el Map por un objeto DTO con los parámetros de configuración y usaremos un archivo de properties externo.
 
 #### Agregando otros archivos properties personalizados para las configuraciones
 
