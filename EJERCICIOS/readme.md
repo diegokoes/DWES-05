@@ -260,3 +260,134 @@ Chuleta Thymeleaf: https://github.com/profeMelola/DWES-05-2024-25/blob/main/APOY
 
 ### 2.4. Crear nuevo producto
 
+## Ampliación 1: creación de logs por consola y en archivos
+
+Vamos a añadir trazas a logs por consola y en ficheros en el servidor usando SLF4J y Logback **(revisar la teoría en el aula virtual de la UT05, "Logging en Java".**
+
+Los logs se imprimirán en la consola y se guardarán en un archivo en la carpeta logs en el directorio donde se ejecuta la aplicación.
+
+### Configuración básica para escribir logs en un archivo
+
+Para guardar los logs en un archivo en el servidor, necesitas personalizar un archivo de configuración de Logback. Crea un archivo llamado logback-spring.xml en el directorio src/main/resources.
+
+Aquí tienes un ejemplo básico de configuración:
+
+```
+<configuration>
+    <!-- Appender para escribir en la consola -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender para escribir en un archivo -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- Ruta del archivo donde se guardarán los logs -->
+        <file>logs/application.log</file>
+
+        <!-- Configuración de la política de rotación -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Archivo con la fecha para cada día -->
+            <fileNamePattern>logs/application.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- Mantener solo los últimos 30 días de logs -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Configurar el nivel de logs -->
+    <root level="INFO">
+        <!-- Enviar logs a la consola -->
+        <appender-ref ref="CONSOLE" />
+        <!-- Enviar logs al archivo -->
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
+
+```
+
+- **Appender para consola (CONSOLE):** Sigue enviando logs a la consola para facilitar el desarrollo.
+- **Appender para archivo (FILE):**
+    - Los logs se escribirán en un archivo llamado logs/application.log.
+    - Los archivos de log se rotarán diariamente (cada día se crea un nuevo archivo con la fecha en el nombre, por ejemplo, application.2025-01-06.log).
+    - Solo se conservarán los últimos 30 días de logs gracias a la propiedad <maxHistory>30</maxHistory>.
+ 
+### Configuración avanzada: logs separados por niveles
+
+Si deseas que los logs se guarden en diferentes archivos según el nivel (INFO, ERROR, etc.), puedes usar configuraciones más avanzadas:
+
+```
+<configuration>
+    <!-- Appender para logs de INFO y superior -->
+    <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- Appender para logs de ERROR -->
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- Nivel de logs global -->
+    <root level="INFO">
+        <appender-ref ref="INFO_FILE" />
+        <appender-ref ref="ERROR_FILE" />
+    </root>
+</configuration>
+```
+
+- Los logs de nivel INFO, WARN, y DEBUG se guardarán en logs/info.log.
+- Los logs de nivel ERROR se guardarán en logs/error.log.
+- Los logs rotarán diariamente y se conservarán solo los últimos 30 días.
+
+### Configurar logs desde application.properties (opción básica)
+
+Si no necesitas configuraciones avanzadas como las anteriores, puedes configurar logs básicos desde el archivo application.properties.
+
+Por ejemplo, puedes habilitar logs en un archivo simple con:
+
+```
+# Habilitar logs en un archivo
+logging.file.name=logs/application.log
+
+# Tamaño máximo del archivo antes de rotar
+logging.file.max-size=10MB
+
+# Número máximo de archivos de respaldo
+logging.file.total-size-cap=100MB
+
+# Nivel de logs global
+logging.level.root=INFO
+
+# Configurar niveles para paquetes específicos
+logging.level.org.springframework=DEBUG
+logging.level.com.mi.paquete=TRACE
+```
