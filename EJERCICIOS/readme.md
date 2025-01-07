@@ -198,7 +198,80 @@ Vamos a crear dos endpoints para realizar las pruebas y ver que obtenemos los va
 ```
 Como mejora, vamos a cambiar el Map por un objeto DTO con los parámetros de configuración y usaremos un archivo de properties externo.
 
-#### Agregando otros archivos properties personalizados para las configuraciones
+### Agregando otros archivos properties personalizados para las configuraciones
+
+Además de usar un fichero de propiedades externo, usaremos DTO y @ConfigurationProperties.
+
+Sigue los pasos:
+
+**DTO DawResponse con Lombok**
+
+```
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data // Genera getters, setters, equals, hashCode y toString automáticamente.
+@AllArgsConstructor // Genera un constructor con todos los campos.
+@NoArgsConstructor // Genera un constructor vacío.
+public class DawResponse {
+    private String code;
+    private String message;
+}
+```
+
+**Clase DawConfig con @ConfigurationProperties**
+
+La clase que representa las propiedades:
+
+```
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+import lombok.Data;
+
+@Component
+@ConfigurationProperties(prefix = "config.daw")
+@Data // Genera getters, setters, equals, hashCode y toString.
+public class DawConfig {
+    private String code;
+    private String message;
+}
+```
+
+**Creamos un controlador nuevo, específico para leer la configuración:**
+
+```
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class DawController {
+
+    private final DawConfig dawConfig;
+
+    @Autowired
+    public DawController(DawConfig dawConfig) {
+        this.dawConfig = dawConfig;
+    }
+
+    @GetMapping("/values-conf")
+    public DawResponse values() {
+        return new DawResponse(dawConfig.getCode(), dawConfig.getMessage());
+    }
+
+}
+```
+
+**Creamos el archivo de propiedades externo:**
+
+En: src/main/resources/config/mi-config.properties
+
+```
+# Archivo externo: mi-config.properties
+config.daw.code=666
+config.daw.message=Primer controlador REST con acentos y eñes
+```
 
 
 
