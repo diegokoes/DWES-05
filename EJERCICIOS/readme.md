@@ -175,13 +175,13 @@ El controlador MVC (ProductoController.java) realizará las peticiones HTTP a tu
 
 Vamos a añadir **RestTemplate** a una nueva clase de configuración **@Configuration**. 
 
-En Spring, el objeto RestTemplate debe ser gestionado por el contenedor de Spring para que pueda ser inyectado con @Autowired.
+En Spring, el objeto RestTemplate debe ser gestionado por el contenedor de Spring para que pueda ser inyectado con @Autowired **(revisar la teoría en el aula virtual de la UT05, "Inversión de Control (IoC) vs Inyección de despendecias (DI)").**
 
 Esto se hace declarando un Bean de RestTemplate en tu configuración de Spring.
 
 Esto le indica a Spring que debe crear y gestionar una instancia de RestTemplate, que luego estará disponible para ser inyectada.
 
-Crea la calse **AppConfig** en el paquete config de tu proyecto:
+Crea la clase **AppConfig** en el paquete config de tu proyecto:
 
 
 ```
