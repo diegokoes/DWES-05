@@ -142,6 +142,64 @@ Usar MapStruct para mapear entre una entidad y un DTO es una práctica muy efici
         ... 
     ```
   
+## Ampliación 4: configuración personalizada
+
+Podemos añadir parámetros de configuración directamente en el archivo **application.properties**. Observa:
+
+```
+spring.application.name=primerCrud
+
+# Configuración de H2
+spring.datasource.url=jdbc:h2:file:~/tienda_practica;AUTO_SERVER=TRUE
+#spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+#configuraciones personalizadas
+config.daw.code=666
+config.daw.message=primer controlador REST
+```
+
+Para acceder a dichos valores desde una clase java de nuestro proyecto, por ejemplo en **ProductoController.java:**
+
+```
+    // ----------------------------------
+    // CONFIGURACIÓN PERSONALIZADA
+    @Value("${config.daw.code}")
+    private String code_conf;
+    @Value("${config.daw.message}")
+    private String message_conf;
+    //-------------------------------------
+```
+
+Vamos a crear dos endpoints para realizar las pruebas y ver que obtenemos los valores correctamente:
+
+```
+    @GetMapping("/values-conf")
+    public Map<String,Object> values(){
+        Map<String,Object> json = new HashMap<>();
+        json.put("code",code_conf);
+        json.put("message",message_conf);
+        return json;
+    }
+
+    @GetMapping("/values-conf2")
+    public Map<String,Object> values(@Value("${config.daw.code}") String code, @Value("${config.daw.message}") String message){
+        Map<String,Object> json = new HashMap<>();
+        json.put("code",code_conf);
+        json.put("message",message_conf);
+        return json;
+    }
+
+```
+
+#### Agregando otros archivos properties personalizados para las configuraciones
+
+
 
 # EJERCICIO 2: Implementar aplicación Spring MVC + Thymeleaf + CRUD de productos
 
