@@ -266,9 +266,33 @@ Vamos a añadir trazas a logs por consola y en ficheros en el servidor usando SL
 
 Los logs se imprimirán en la consola y se guardarán en un archivo en la carpeta logs en el directorio donde se ejecuta la aplicación.
 
-### Configuración básica para escribir logs en un archivo
+### Configurar logs desde application.properties (opción básica)
 
-Para guardar los logs en un archivo en el servidor, necesitas personalizar un archivo de configuración de Logback. Crea un archivo llamado logback-spring.xml en el directorio src/main/resources.
+Si no necesitas configuraciones avanzadas como las anteriores, puedes configurar logs básicos desde el archivo application.properties.
+
+Por ejemplo, puedes habilitar logs en un archivo simple con:
+
+```
+# Habilitar logs en un archivo
+logging.file.name=logs/application.log
+
+# Tamaño máximo del archivo antes de rotar
+logging.file.max-size=10MB
+
+# Número máximo de archivos de respaldo
+logging.file.total-size-cap=100MB
+
+# Nivel de logs global
+logging.level.root=INFO
+
+# Configurar niveles para paquetes específicos
+logging.level.org.springframework=DEBUG
+logging.level.com.mi.paquete=TRACE
+```
+
+### Configuración básica en logback-spring.xml
+
+Necesitas personalizar un archivo de configuración de Logback. Crea un archivo llamado **logback-spring.xml en el directorio src/main/resources.**
 
 Aquí tienes un ejemplo básico de configuración:
 
@@ -368,26 +392,4 @@ Si deseas que los logs se guarden en diferentes archivos según el nivel (INFO, 
 - Los logs de nivel ERROR se guardarán en logs/error.log.
 - Los logs rotarán diariamente y se conservarán solo los últimos 30 días.
 
-### Configurar logs desde application.properties (opción básica)
 
-Si no necesitas configuraciones avanzadas como las anteriores, puedes configurar logs básicos desde el archivo application.properties.
-
-Por ejemplo, puedes habilitar logs en un archivo simple con:
-
-```
-# Habilitar logs en un archivo
-logging.file.name=logs/application.log
-
-# Tamaño máximo del archivo antes de rotar
-logging.file.max-size=10MB
-
-# Número máximo de archivos de respaldo
-logging.file.total-size-cap=100MB
-
-# Nivel de logs global
-logging.level.root=INFO
-
-# Configurar niveles para paquetes específicos
-logging.level.org.springframework=DEBUG
-logging.level.com.mi.paquete=TRACE
-```
