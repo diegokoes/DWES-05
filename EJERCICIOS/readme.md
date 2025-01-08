@@ -58,49 +58,8 @@ En el segundo se usa directamente y de forma nativa HttpServletRequest:
 
 **¿Y si no pasamos algún parámetro del request? ¿Y si pasamos un parámetro con un valor que no se puede convertir a numérico?**
 
-Observa que con @RequestParam obtienes directamente el precio de tipo entero y no es necesario hacer un Integer.parseInt que fallará si llega a null o el valor no es convertible a numérico.
+Próximamente manejo de excepciones y validaciones ....
 
-```
-@PostMapping("/add")
-public ResponseEntity<String> add(@RequestParam(required = false) String nombre, 
-                                  @RequestParam(required = false) String precio, 
-                                  @RequestParam(required = false) String sku) {
-    
-    // Validar que los parámetros no sean nulos o vacíos
-    if (nombre == null || nombre.isEmpty()) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El nombre del producto es obligatorio.");
-    }
-    
-    if (sku == null || sku.isEmpty()) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El SKU del producto es obligatorio.");
-    }
-    
-    if (precio == null || precio.isEmpty()) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El precio del producto es obligatorio.");
-    }
-    
-    // Validar que el precio sea un número
-    int precioInt;
-    try {
-        precioInt = Integer.parseInt(precio);  // Intentar convertir a entero
-    } catch (NumberFormatException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El precio debe ser un número válido.");
-    }
-    
-    // Crear el producto
-    Producto producto = new Producto();
-    producto.setNombre(nombre);
-    producto.setPrecio(precioInt);
-    producto.setSku(sku);
-    
-    // Guardar el producto
-    productoRepository.save(producto);
-    
-    // Devolver una respuesta exitosa
-    return ResponseEntity.status(HttpStatus.CREATED).body("Producto agregado con éxito.");
-}
-
-```
 
 ## Ampliación 3: uso de la librería MapStruct
 
