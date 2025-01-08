@@ -8,14 +8,14 @@ Aprenderemos a:
 - Configurar el acceso a la base de datos (no trabajaremos en memoria).
 - Crear la entidad de persistencia Producto.
 - Crear el repositorio asociado a Producto.
-- Crear el controlador Rest.
-- Realizar operaciones CRUD.
+- Crear el controlador Rest con diferentes endpoints. **(revisar la teoría en el aula virtual de la UT06, "Métodos HTTP para servicios RESTful")**
+- Realizar operaciones CRUD sobre la tabla Productos.
 
 Sigue las instrucciones del profesor...
 
 ## Ampliación 1: mejorar el ejercicio 1 usando ProductoDTO
 
-Después de haber aprendido la utilidad de un DTO (revisar la teoría en el aula virtual de la UT05, "DTO - Data Transfer Object") vamos a crear un DTO adecuado para la entidad Producto.
+Después de haber aprendido la utilidad de un DTO **(revisar la teoría en el aula virtual de la UT05, "DTO - Data Transfer Object")** vamos a crear un DTO adecuado para la entidad Producto.
 
 Los atributos necesarios a transmitir serán el nombre, precio y sku.
 
