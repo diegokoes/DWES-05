@@ -124,7 +124,101 @@ Si necesitásemos agregar lógica más compleja podríamos usar métodos persona
 ProductoDTO toProductoDTO(Producto producto);
 ```
 
-## Ampliación 4: configuración personalizada
+## Ampliación 4: manejar excepciones
+
+**1. Crear un DTO para guardar información de errores:**
+
+Se llamará **ErrorDTO**  y tendrá estos dos atributos. Usa Lombok para completar el resto de código.
+
+```
+    private String message;
+    private String details;
+```
+
+**2. Crear @ControllerAdvice para manejar excepciones:**
+
+ControllerAdvice centraliza el manejo de excepciones en toda la aplicación.
+
+```
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(NumberFormatException.class)
+    public ResponseEntity<ErrorDTO> handleNumberFormatException(NumberFormatException ex) {
+        ErrorDTO error = new ErrorDTO(
+                "Invalid number format",
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    // Puedes añadir más métodos @ExceptionHandler para manejar otras excepciones.
+}
+
+```
+
+**3. Añadir al controlador REST la gestión del error:**
+
+Fíjate en este código de ejemplo y vamos a ver cómo aplicarlo a nuestro controlador rest:
+
+```
+    @GetMapping("/parse-int")
+    public String parseInteger(@RequestParam String number) {
+        int parsedNumber = Integer.parseInt(number); // Puede lanzar NumberFormatException
+        return "Parsed number: " + parsedNumber;
+    }
+```
+
+**4. Añadir gestión genérica de excepciones no previstas:**
+
+Agregamos un método en la clase GlobalExceptionHandler para Exception:
+
+```
+@ExceptionHandler(Exception.class)
+public ResponseEntity<ErrorDTO> handleGenericException(Exception ex) {
+    ErrorDTO error = new ErrorDTO(
+            "Internal Server Error",
+            ex.getMessage()
+    );
+    return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+}
+
+```
+## Ampliación 5: validaciones
+
+Estas son las validaciones más comunes:
+
+![image](https://github.com/user-attachments/assets/fbe1bbbe-2f6c-4fa9-8ebf-b2208e6f48f5)
+
+
+Vamos a añadir validaciones automáticas a ProductoDTO:
+
+```
+    @NotBlank(message = "El nombre es obligatorio")
+    private String nombre;
+
+    @Min(value = 1, message = "El precio debe ser un número positivo")
+    private int precio;
+
+    @NotBlank(message = "El SKU es obligatorio")
+    private String sku;
+```
+
+En el controlador rest vamos a añadir la validación de productoDTO. Observa:
+
+```
+@PostMapping("/add")
+    public String add(@Valid @RequestBody ProductoDTO productoDTO) {
+              ...
+    }
+```
+
+## Ampliación 6: configuración personalizada
 
 Podemos añadir parámetros de configuración directamente en el archivo **application.properties**. Observa:
 
