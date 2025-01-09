@@ -191,7 +191,7 @@ public ResponseEntity<ErrorDTO> handleGenericException(Exception ex) {
 ```
 ## Ampliación 5: validaciones
 
-Estas son las validaciones más comunes:
+Estas son las anotaciones más comunes:
 
 ![image](https://github.com/user-attachments/assets/fbe1bbbe-2f6c-4fa9-8ebf-b2208e6f48f5)
 
