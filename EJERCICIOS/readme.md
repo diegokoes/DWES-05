@@ -218,6 +218,10 @@ En el controlador rest vamos a añadir la validación de productoDTO. Observa:
     }
 ```
 
+Ejemplo de otras validaciones:
+
+![image](https://github.com/user-attachments/assets/cb5168ba-e896-49fc-b17d-d9731ee5feea)
+
 ## Ampliación 6: configuración personalizada
 
 Podemos añadir parámetros de configuración directamente en el archivo **application.properties**. Observa:
