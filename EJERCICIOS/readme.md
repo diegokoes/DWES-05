@@ -191,6 +191,15 @@ public ResponseEntity<ErrorDTO> handleGenericException(Exception ex) {
 ```
 ## Ampliación 5: validaciones
 
+Es necesario añadir la dependencia **Spring Boot Starter Validation**:
+
+```
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+```
+
 Estas son las anotaciones más comunes:
 
 ![image](https://github.com/user-attachments/assets/fbe1bbbe-2f6c-4fa9-8ebf-b2208e6f48f5)
@@ -221,6 +230,7 @@ En el controlador rest vamos a añadir la validación de productoDTO. Observa:
 Ejemplo de otras validaciones:
 
 ![image](https://github.com/user-attachments/assets/cb5168ba-e896-49fc-b17d-d9731ee5feea)
+
 
 ## Ampliación 6: configuración personalizada
 
