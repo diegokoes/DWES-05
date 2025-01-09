@@ -27,6 +27,8 @@ Pasos a realizar:
 - Mapea la entidad producto con el dto. Implementa una clase @Service adecuada.
 - Modifica el API Rest de productos para usar ProductoDTO en lugar de directamente el Entity.
 
+___
+
 ## Ampliación 2: uso nativo de HttpServletRequest
 
 Observa el siguiente código donde hay dos métodos para crear un producto en la base de datos.
@@ -60,8 +62,9 @@ En el segundo se usa directamente y de forma nativa HttpServletRequest:
 
 **¿Y si no pasamos algún parámetro del request? ¿Y si pasamos un parámetro con un valor que no se puede convertir a numérico?**
 
-Próximamente manejo de excepciones y validaciones ....
+Vamos a revisar la ampliación 4...
 
+___
 
 ## Ampliación 3: uso de la librería MapStruct
 
@@ -125,6 +128,8 @@ Si necesitásemos agregar lógica más compleja podríamos usar métodos persona
 @Mapping(target = "nombreCompleto", expression = "java(producto.getNombre() + ' ' + producto.getDescripcion())")
 ProductoDTO toProductoDTO(Producto producto);
 ```
+
+___
 
 ## Ampliación 4: manejar excepciones
 
@@ -191,6 +196,9 @@ public ResponseEntity<ErrorDTO> handleGenericException(Exception ex) {
 }
 
 ```
+
+___
+
 ## Ampliación 5: validaciones
 
 Es necesario añadir la dependencia **Spring Boot Starter Validation**:
@@ -233,6 +241,8 @@ Ejemplo de otras validaciones:
 
 ![image](https://github.com/user-attachments/assets/cb5168ba-e896-49fc-b17d-d9731ee5feea)
 
+
+___
 
 ## Ampliación 6: configuración personalizada
 
@@ -365,7 +375,7 @@ config.daw.code=666
 config.daw.message=Primer controlador REST con acentos y eñes
 ```
 
-
+___
 
 # EJERCICIO 2: Implementar aplicación Spring MVC + Thymeleaf + CRUD de productos
 
