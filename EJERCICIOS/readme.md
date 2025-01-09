@@ -13,6 +13,8 @@ Aprenderemos a:
 
 Sigue las instrucciones del profesor...
 
+___
+
 ## Ampliación 1: mejorar el ejercicio 1 usando ProductoDTO
 
 Después de haber aprendido la utilidad de un DTO **(revisar la teoría en el aula virtual de la UT05, "DTO - Data Transfer Object")** vamos a crear un DTO adecuado para la entidad Producto.
