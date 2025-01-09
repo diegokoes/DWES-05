@@ -236,6 +236,35 @@ En el controlador rest vamos a añadir la validación de productoDTO. Observa:
               ...
     }
 ```
+Cuando Spring encuentra @Valid, ejecuta las validaciones de ProductoDTO antes de llamar al método. 
+
+Si alguna validación falla, Spring lanza una excepción (MethodArgumentNotValidException) y devolverá automáticamente un código de estado HTTP 400 Bad Request y un mensaje de error que describe las validaciones fallidas.
+
+Por ejemplo, si intentas enviar un JSON con datos inválidos:
+
+```
+{
+    "id": null,
+    "nombre": "",
+    "precio": -5,
+    "descripcion": "Esto es una descripción demasiado larga que excede el límite de 200 caracteres. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "fechaExpiracion": "2023-01-01"
+}
+```
+
+```
+{
+    "timestamp": "2025-01-09T10:30:00",
+    "status": 400,
+    "errors": [
+        "El ID del producto no puede ser nulo",
+        "El nombre del producto es obligatorio",
+        "El precio debe ser mayor a 0",
+        "La descripción no puede tener más de 200 caracteres",
+        "La fecha de expiración debe ser en el futuro"
+    ]
+}
+``` 
 
 Ejemplo de otras validaciones:
 
