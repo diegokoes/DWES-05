@@ -1,4 +1,4 @@
-# EJERCICIO 1: RestController, CRUD de productos, MVC
+# EJERCICIO 1: RestController, CRUD de productos
 
 Vamos a partir de la base de datos H2 usada en la práctica de la primera evaluación **tienda_practica.mv.db**
 
@@ -201,7 +201,7 @@ ___
 
 ## Ampliación 5: validaciones
 
-Es necesario añadir la dependencia **Spring Boot Starter Validation**:
+Es necesario añadir la dependencia **Spring Boot Starter Validation (Bean Validation)**:
 
 ```
         <dependency>
