@@ -88,8 +88,13 @@ Usar MapStruct para mapear entre una entidad y un DTO es una práctica muy efici
     }
 
   ```
+
+Fíjate que cuando anotas la interfaz con @Mapper, le estás indicando a MapStruct que genere una implementación de esta interfaz automáticamente durante el proceso de compilación.
+
+
 - Usar el Mapper:
-    ```
+    - Forma 1:
+        ```
         ....
         List<Producto> productos = productoRepository.findAll();
     
@@ -99,8 +104,25 @@ Usar MapStruct para mapear entre una entidad y un DTO es una práctica muy efici
                 .collect(Collectors.toList());
 
         ... 
-    ```
-  
+        ```
+    - Forma 2:
+      ```
+          List<Producto> productos = productoRepository.findAll();
+          return productos.stream()
+            .map(producto -> ProductoMapper.INSTANCE.toProductoDTO(producto))
+            .collect(Collectors.toList());
+      
+      ```
+    
+
+Si necesitásemos agregar lógica más compleja podríamos usar métodos personalizados o combinar MapStruct con expresiones. Por ejemplo:
+
+```
+@Mapping(source = "sku", target = "codigo")
+@Mapping(target = "nombreCompleto", expression = "java(producto.getNombre() + ' ' + producto.getDescripcion())")
+ProductoDTO toProductoDTO(Producto producto);
+```
+
 ## Ampliación 4: configuración personalizada
 
 Podemos añadir parámetros de configuración directamente en el archivo **application.properties**. Observa:
