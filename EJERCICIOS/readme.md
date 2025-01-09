@@ -90,6 +90,7 @@ Usar MapStruct para mapear entre una entidad y un DTO es una práctica muy efici
   ```
 
 Fíjate que cuando anotas la interfaz con @Mapper, le estás indicando a MapStruct que genere una implementación de esta interfaz automáticamente durante el proceso de compilación.
+Además, el uso de INSTANCE elimina la necesidad de crear manualmente una instancia del mapper. MapStruct sigue el patrón singleton
 
 
 - Usar el Mapper:
