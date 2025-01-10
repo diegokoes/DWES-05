@@ -309,22 +309,22 @@ Para acceder a dichos valores desde una clase java de nuestro proyecto, por ejem
 Vamos a crear dos endpoints para realizar las pruebas y ver que obtenemos los valores correctamente:
 
 ```
-    @GetMapping("/values-conf")
-    public Map<String,Object> values(){
-        Map<String,Object> json = new HashMap<>();
+        @GetMapping("/values-conf")
+    public Map<String,String> values(){
+        Map<String,String> json = new HashMap<>();
         json.put("code",code_conf);
         json.put("message",message_conf);
         return json;
     }
+
 
     @GetMapping("/values-conf2")
-    public Map<String,Object> values(@Value("${config.daw.code}") String code, @Value("${config.daw.message}") String message){
-        Map<String,Object> json = new HashMap<>();
-        json.put("code",code_conf);
-        json.put("message",message_conf);
+    public Map<String,String> values(@Value("${config.daw.code}") String code, @Value("${config.daw.message}") String message){
+        Map<String,String> json = new HashMap<>();
+        json.put("code",code);
+        json.put("message",message);
         return json;
     }
-
 ```
 Como mejora, vamos a cambiar el Map por un objeto DTO con los parámetros de configuración y usaremos un archivo de properties externo.
 
@@ -344,7 +344,7 @@ import lombok.NoArgsConstructor;
 @Data // Genera getters, setters, equals, hashCode y toString automáticamente.
 @AllArgsConstructor // Genera un constructor con todos los campos.
 @NoArgsConstructor // Genera un constructor vacío.
-public class DawResponse {
+public class DawResponseDTO {
     private String code;
     private String message;
 }
