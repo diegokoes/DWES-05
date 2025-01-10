@@ -220,12 +220,11 @@ Vamos a añadir validaciones automáticas a ProductoDTO:
 ```
     @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
-
-    @Min(value = 1, message = "El precio debe ser un número positivo")
-    private int precio;
-
     @NotBlank(message = "El SKU es obligatorio")
+    @Size(min = 4, max = 4, message = "El SKU debe tener exactamente 4 caracteres")
     private String sku;
+    @Min(value = 100, message = "El precio debe superior a 99")
+    private int precio;
 ```
 
 En el controlador rest vamos a añadir la validación de productoDTO. Observa:
