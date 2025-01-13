@@ -1,5 +1,7 @@
 # Implementar un API REST utilizando Spring Boot para gestionar un sistema de Estudiantes y Cursos
 
+Crea un proyecto Spring Boot llamado NOMBRE_API_ESTUDIANTES... PENDIENTE DEFINIR!!!!
+
 ## Requisitos
 
 Los estudiantes podrán inscribirse en varios cursos, y los cursos podrán tener varios estudiantes (relación @ManyToMany).
