@@ -43,6 +43,7 @@ El id se corresponde con del codigo.
 **Inscripciones:**
 - POST /estudiantes/{idEstudiante}/cursos/{idCurso} → Inscribir un estudiante en un curso.
 - GET /estudiantes/inscripciones → Listado de inscripciones
+- GET /estudiantes/inscripciones/{idCurso} → Listado de inscripciones
 - DELETE /estudiantes/inscripciones/{idEstudiante}/{idCurso} → Borrar a un estudiante del curso
   
 
