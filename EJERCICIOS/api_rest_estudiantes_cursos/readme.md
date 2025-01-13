@@ -41,6 +41,8 @@ Además, se debe implementar un endpoint para inscribir estudiantes en cursos.
 
 ## Script de base de datos H2
 
+A la base de datos la llamaremos **estudiantes.db**.
+
 ```
 -- Tabla Estudiantes
 CREATE TABLE estudiantes (
