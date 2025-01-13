@@ -64,7 +64,7 @@ CREATE TABLE cursos (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     descripcion VARCHAR(255)
-);v
+);
 -- Tabla intermedia para la relación ManyToMany
 CREATE TABLE estudiantes_cursos (
     estudiante_id BIGINT NOT NULL,
