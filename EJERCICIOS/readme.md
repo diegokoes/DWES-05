@@ -376,6 +376,8 @@ public class DawResponseDTO {
 }
 ```
 
+Ten en cuenta que Jackson neesita deserializar de DTO a JSON y requiere un constructor sin argumento o constructores con todos los campos, por tanto poner los atributos final puede complicar dicha serialización.
+
 **Clase DawConfig (en el paquete config) con @ConfigurationProperties**
 
 La clase que representa las propiedades:
