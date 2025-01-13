@@ -1,6 +1,6 @@
 # Implementar un API REST utilizando Spring Boot para gestionar un sistema de Estudiantes y Cursos
 
-Crea un proyecto Spring Boot llamado NOMBRE_API_ESTUDIANTES... PENDIENTE DEFINIR!!!!
+Crea un proyecto Spring Boot llamado NOMBRE_API_ESTUDIANTES... PENDIENTE DEFINIR CÓMO TRABAJAR EN GITHUB!!!!
 
 ## Requisitos
 
@@ -77,6 +77,16 @@ INSERT INTO cursos (nombre, descripcion) VALUES
 ('Historia', 'Historia mundial desde 1900');
 
 ```
+## DTOs
+
+Crea los DTO correspondientes. Simplemente que no contengan el id.
+
+Además crea **InscripcionDTO** para guardar información combinada del estudiante y curso:
+- nombreEstudiante
+- emailEstudiante
+- nombreCurso
+
+El endpoint POST /estudiantes/{idEstudiante}/cursos/{idCurso} → Devolverá InscripciónDTO.
 
 ## Gestión de excepciones 
 
@@ -96,6 +106,8 @@ Debe contener esta información y usaremos el principio de inmutabilidad:
     private final LocalDateTime timestamp;
     private final int statusCode;
 ```
+
+## Validaciones
 
 ## Logging de errores
 
