@@ -19,6 +19,9 @@ Además, se debe implementar un endpoint para inscribir estudiantes en cursos.
 ### Endpoints del API:
 
 **Estudiantes:**
+
+El id se corresponde con el NIA
+
 - GET /estudiantes → Listar todos los estudiantes.
 - GET /estudiantes/{id} → Obtener un estudiante por su ID.
 - POST /estudiantes → Crear un nuevo estudiante.
@@ -27,6 +30,9 @@ Además, se debe implementar un endpoint para inscribir estudiantes en cursos.
 - DELETE /estudiantes/{id} → Eliminar un estudiante.
   
 **Cursos:**
+
+El id se corresponde con del codigo.
+
 - GET /cursos → Listar todos los cursos.
 - GET /cursos/{id} → Obtener un curso por su ID.
 - POST /cursos → Crear un nuevo curso.
@@ -36,8 +42,9 @@ Además, se debe implementar un endpoint para inscribir estudiantes en cursos.
   
 **Inscripciones:**
 - POST /estudiantes/{idEstudiante}/cursos/{idCurso} → Inscribir un estudiante en un curso.
-
-
+- GET /estudiantes/inscripciones → Listado de inscripciones
+- DELETE /estudiantes/inscripciones/{idEstudiante}/{idCurso} → Borrar a un estudiante del curso
+  
 
 ## Script de base de datos H2
 
@@ -88,6 +95,7 @@ Además crea **InscripcionDTO** para guardar información combinada del estudian
 - nombreCurso
 
 El endpoint POST /estudiantes/{idEstudiante}/cursos/{idCurso} → Devolverá InscripciónDTO.
+El endpoint GET /estudiantes/inscripciones → Devolverá un listado de todas las inscripciones
 
 ## Gestión de excepciones 
 
