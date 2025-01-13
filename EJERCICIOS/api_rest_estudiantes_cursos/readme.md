@@ -122,3 +122,7 @@ A la hora de persistir en la base de datos debes de tener en cuenta las siguient
 ## Logging de errores
 
 Pendiente de definir....
+
+## Fichero de propiedades externo.
+
+configuration.properties ....
