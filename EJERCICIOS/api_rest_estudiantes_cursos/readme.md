@@ -109,6 +109,15 @@ Debe contener esta información y usaremos el principio de inmutabilidad:
 
 ## Validaciones
 
+A la hora de persistir en la base de datos debes de tener en cuenta las siguientes validaciones:
+- El nombre del estudiante no puede estar vacío.
+- El email no puede estar vacío
+- Debe proporcionar un email válido (@Email)
+- El nombre del curso no puede estar vacío.
+- El nombre del curso debe tener entre 3 y 50 caracteres.
+- La descripción no debe exceder los 255 caracteres.
+
+
 ## Logging de errores
 
 Pendiente de definir....
