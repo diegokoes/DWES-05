@@ -336,7 +336,7 @@ Sigue los pasos:
 
 **Creamos el archivo de propiedades externo:**
 
-En: src/main/resources/config/mi-config.properties
+En: src/main/resources/mi-config.properties
 
 ```
 # Archivo externo: mi-config.properties
