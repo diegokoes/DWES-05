@@ -334,7 +334,36 @@ Además de usar un fichero de propiedades externo, usaremos DTO y @Configuration
 
 Sigue los pasos:
 
+**Creamos el archivo de propiedades externo:**
+
+En: src/main/resources/config/mi-config.properties
+
+```
+# Archivo externo: mi-config.properties
+config.daw.code=pruebaCode
+config.daw.message=Mensaje personalizado
+```
+
+**Configuramos el uso de dicho fichero de propiedades externo:**
+
+En application.properties añadimos:
+
+```
+#Esto carga tu archivo mi-config.properties junto con otros archivos de configuración.
+spring.config.import=classpath:mi-config.properties
+```
+
+También podría añadirse a la clase marcada como @Configuration:
+
+```
+@PropertySources({
+        @PropertySource(value="classpath:values.properties", encoding = "UTF-8"),
+})
+```
+
 **DTO DawResponse con Lombok**
+
+Es el objeto que devolverá el endpoint con los valores de los parámetros de configuración:
 
 ```
 
@@ -377,16 +406,6 @@ public class DawController {
     }
 
 }
-```
-
-**Creamos el archivo de propiedades externo:**
-
-En: src/main/resources/config/mi-config.properties
-
-```
-# Archivo externo: mi-config.properties
-config.daw.code=pruebaCode
-config.daw.message=Mensaje personalizado
 ```
 
 ___
