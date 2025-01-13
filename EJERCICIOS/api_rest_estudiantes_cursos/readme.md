@@ -41,7 +41,7 @@ Además, se debe implementar un endpoint para inscribir estudiantes en cursos.
 
 ## Script de base de datos H2
 
-A la base de datos la llamaremos **estudiantes.db**.
+A la base de datos la llamaremos **estudiantes (estudiantes.mv.db)**.
 
 ```
 -- Tabla Estudiantes
@@ -56,8 +56,7 @@ CREATE TABLE cursos (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     descripcion VARCHAR(255)
-);
-
+);v
 -- Tabla intermedia para la relación ManyToMany
 CREATE TABLE estudiantes_cursos (
     estudiante_id BIGINT NOT NULL,
