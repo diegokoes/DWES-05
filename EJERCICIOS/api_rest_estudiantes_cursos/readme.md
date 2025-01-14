@@ -228,3 +228,14 @@ Pendiente de definir....
 
 Pendiente....
 
+## Seguridad y Autorización:
+
+Para restricciones de acceso, implementaremos autenticación y autorización (usando JWT).
+
+Pendiente...
+
+## Documentación
+
+Proporciona documentación clara (por ejemplo, usando Swagger/OpenAPI) para que los desarrolladores puedan interactuar fácilmente con tu API.
+
+Pendiente...
