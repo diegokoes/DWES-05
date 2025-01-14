@@ -529,7 +529,12 @@ Chuleta Thymeleaf: https://github.com/profeMelola/DWES-05-2024-25/blob/main/APOY
 
 ### 2.4. Crear nuevo producto
 
-## Ampliación 1: creación de logs por consola y en archivos
+
+## Ampliación 1: gestión de errores
+
+## Ampliación 2: reactivo (asíncrono)
+
+## Ampliación 3: creación de logs por consola y en archivos
 
 Vamos a añadir trazas a logs por consola y en ficheros en el servidor usando SLF4J y Logback **(revisar la teoría en el aula virtual de la UT05, "Logging en Java".**
 
