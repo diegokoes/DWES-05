@@ -135,9 +135,10 @@ INSERT INTO cursos (nombre, descripcion) VALUES
 ('Historia', 'Historia mundial desde 1900');
 
 ```
+Como algunos de vosotros ya tiene la base de datos creada y he detectado la necesidad de añadir unos nuevos campos, os paso unos scripts para actualizarla.
 
-Vamos a añadir unos campos únicos en cada tabla para poder referenciar a los distintos objetos de forma única sin usar la clave primaria id.
-Además, vamos a añadir a la tabla intermedia un campo, llamado fecha_inscripción:
+- Vamos a añadir unos campos únicos en cada tabla para poder referenciar a los distintos objetos de forma única sin usar la clave primaria id.
+- Vamos a añadir a la tabla intermedia un campo, llamado fecha_inscripción.
 
 ```
 -- Agregar el campo NIA a la tabla estudiantes
