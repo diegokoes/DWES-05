@@ -200,7 +200,7 @@ Completad la clase ApiConfig:
 
 ```
 @Configuration
-@ConfigurationProperties(prefix = "config.api.")
+@ConfigurationProperties(prefix = "config.api")
 @PropertySources({
         @PropertySource(value="classpath:configuration.properties", encoding = "UTF-8"),
 })
