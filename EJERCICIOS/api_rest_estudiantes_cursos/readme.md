@@ -30,29 +30,35 @@ El id se corresponde con el NIA del estudiante.
       "nombre": "Juan Pérez",
       "edad": 20,
       "correo": "juan.perez@example.com",
-      "curso": {
+      "cursos": [{
         "codigo": "101",
         "nombre": "Matemáticas Básicas",
         "descripcion": "Curso introductorio de matemáticas"
-      }
+      }]
     },
     {
       "nia": "87654321",
       "nombre": "Ana López",
       "edad": 22,
       "correo": "ana.lopez@example.com",
-      "curso": {
-        "codigo": "102",
-        "nombre": "Física General",
-        "descripcion": "Curso introductorio de física"
-      }
+      "cursos": [{
+          "codigo": "102",
+          "nombre": "Física General",
+          "descripcion": "Curso introductorio de física"
+        },
+        {
+          "codigo": "101",
+          "nombre": "Matemáticas Básicas",
+          "descripcion": "Curso introductorio de matemáticas"
+        }
+      ]
     },
     {
       "nia": "45678912",
       "nombre": "Carlos Gómez",
       "edad": 19,
       "correo": "carlos.gomez@example.com",
-      "curso": null
+      "cursos": null
     }
   ]
   
