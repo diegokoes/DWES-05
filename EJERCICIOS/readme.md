@@ -444,22 +444,22 @@ El controlador MVC (ProductoController.java) realizará las peticiones HTTP a tu
 
 Vamos a añadir **RestTemplate** a una nueva clase de configuración **@Configuration**. 
 
-En Spring, el objeto RestTemplate debe ser gestionado por el contenedor de Spring para que pueda ser inyectado con @Autowired **(revisar la teoría en el aula virtual de la UT05, "Inversión de Control (IoC) vs Inyección de despendecias (DI)").**
+Crea la clase **AppConfig** en el paquete config de tu proyecto. Será una clase de configuración para poder inyectar objetos **WebClient, parte de Spring WebFlux**.
 
-Esto se hace declarando un Bean de RestTemplate en tu configuración de Spring.
-
-Esto le indica a Spring que debe crear y gestionar una instancia de RestTemplate, que luego estará disponible para ser inyectada.
-
-Crea la clase **AppConfig** en el paquete config de tu proyecto:
-
+Podríamos usar también **RestTemplate**, pero es más moderno usar **WebClient** que funciona tanto de forma síncrona como reactiva.
 
 ```
 @Configuration
 public class AppConfig {
 
+    @Value("${daw.api.url}")
+    private String url;
+
     @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
+    public WebClient webClient(WebClient.Builder builder) {
+        return builder
+                .baseUrl(url) // Configuración global opcional
+                .build();
     }
 }
 ```
@@ -467,7 +467,7 @@ public class AppConfig {
 **Ten en cuenta que:**
 
 - El API REST ya maneja el CRUD de productos.
-- El controlador MVC realiza peticiones HTTP a tu API REST usando RestTemplate para realizar las operaciones CRUD.
+- El controlador MVC realiza peticiones HTTP a tu API REST usando WebClient para realizar las operaciones CRUD.
 - Las vistas Thymeleaf permiten interactuar con el controlador y visualizar la lista de productos, crear nuevos, editar y eliminar productos.
 
 **El proyecto quedará de la siguiente manera:**
@@ -485,7 +485,7 @@ src/main/java/es/daw/primermvc
 ``` 
 
 ## 2. Actualizar las vistas Thymeleaf
-Con el controlador MVC que interactúa a través de RestTemplate con tu API REST, ahora necesitamos ajustar las vistas de Thymeleaf para que puedas ver y manejar los productos.
+
 
 ### 2.1. Listar productos
 
