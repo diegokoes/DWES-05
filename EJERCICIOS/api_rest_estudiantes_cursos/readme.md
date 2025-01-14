@@ -156,7 +156,7 @@ ADD COLUMN fecha_inscripcion DATE NOT NULL;
 ```
 ## Entities
 
-En el caso de relaciones manytomany con campos en la tabla intermedia, es necesario crear una clase entidad de dicha tabla de esta manera:
+En el caso de **relaciones manytomany con campos en la tabla intermedia (fechaInscripcion)**, es necesario crear una clase entidad de dicha tabla de esta manera:
 
 ```
 @Entity
