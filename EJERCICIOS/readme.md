@@ -442,8 +442,6 @@ Vamos a aprender a conectar el **frontend (Thymeleaf)** con esos endpoints para 
 
 El controlador MVC (ProductoController.java) realizará las peticiones HTTP a tu API REST y procesará las respuestas. 
 
-Vamos a añadir **RestTemplate** a una nueva clase de configuración **@Configuration**. 
-
 Crea la clase **AppConfig** en el paquete config de tu proyecto. Será una clase de configuración para poder inyectar objetos **WebClient, parte de Spring WebFlux**.
 
 Podríamos usar también **RestTemplate**, pero es más moderno usar **WebClient** que funciona tanto de forma síncrona como reactiva.
