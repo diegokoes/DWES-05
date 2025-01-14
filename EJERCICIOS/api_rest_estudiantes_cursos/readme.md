@@ -22,22 +22,68 @@ Además, se debe implementar un endpoint para inscribir estudiantes en cursos.
 
 El id se corresponde con el NIA del estudiante.
 
-- GET /estudiantes → Listar todos los estudiantes.
+- GET /estudiantes → Listar todos los estudiantes. Incluir el curso al que está inscrito cada estudiante (si aplica). Por ejemplo:
+  ```
+  [
+    {
+      "nia": "12345678",
+      "nombre": "Juan Pérez",
+      "edad": 20,
+      "correo": "juan.perez@example.com",
+      "curso": {
+        "codigo": "101",
+        "nombre": "Matemáticas Básicas",
+        "descripcion": "Curso introductorio de matemáticas"
+      }
+    },
+    {
+      "nia": "87654321",
+      "nombre": "Ana López",
+      "edad": 22,
+      "correo": "ana.lopez@example.com",
+      "curso": {
+        "codigo": "102",
+        "nombre": "Física General",
+        "descripcion": "Curso introductorio de física"
+      }
+    },
+    {
+      "nia": "45678912",
+      "nombre": "Carlos Gómez",
+      "edad": 19,
+      "correo": "carlos.gomez@example.com",
+      "curso": null
+    }
+  ]
+  
+  ```
+  
 - GET /estudiantes/{id} → Obtener un estudiante por su ID.
 - POST /estudiantes → Crear un nuevo estudiante.
 - PUT /estudiantes/{id} → Actualizar un estudiante existente.
 - PATCH /estudiantes/{id} → Actualiza parcialmente los atributos de un estudiante, como su nombre o correo electrónico.
-- DELETE /estudiantes/{id} → Eliminar un estudiante.
+- DELETE /estudiantes/{id} → Eliminar un estudiante. ¿Qué sucede si el estudiante está inscrito a un curso?
   
 **Cursos:**
 
 El id se corresponde con del código del curso.
 
 - GET /cursos → Listar todos los cursos.
-- GET /cursos/{id} → Obtener un curso por su ID.
+- GET /cursos/{id} → Obtener un curso por su ID. Incluir los estudiantes inscritos en ese curso (si aplica). Por ejemplo:
+  ```
+  {
+    "codigo": "101",
+    "nombre": "Matemáticas Básicas",
+    "descripcion": "Curso introductorio",
+    "estudiantesInscritos": [
+      { "nia": "12345678", "nombre": "Juan Pérez" },
+      { "nia": "87654321", "nombre": "Ana López" }
+    ]
+  }
+  ```
 - POST /cursos → Crear un nuevo curso.
 - PUT /cursos/{id} → Actualizar un curso existente.
-- DELETE /cursos/{id} → Eliminar un curso.
+- DELETE /cursos/{id} → Eliminar un curso. ¿Qué sucede si el curso tienes estudiantes inscritos?
 - PATCH /cursos/{id} → Actualiza parcialmente los atributos de un curso, como su nombre o descripción.
   
 **Inscripciones:**
@@ -146,10 +192,14 @@ A la hora de persistir en la base de datos debes de tener en cuenta las siguient
 - La descripción no debe exceder los 255 caracteres.
 
 
+## Fichero de propiedades externo.
+
+configuration.properties ....
+
 ## Logging de errores
 
 Pendiente de definir....
 
-## Fichero de propiedades externo.
+## Paginación
 
-configuration.properties ....
+
