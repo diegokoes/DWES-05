@@ -89,6 +89,21 @@ INSERT INTO cursos (nombre, descripcion) VALUES
 ('Historia', 'Historia mundial desde 1900');
 
 ```
+
+Vamos a añadir unos campos únicos en cada tabla para poder referenciar a los distintos objetos de forma única sin usar la clave primaria id:
+
+```
+-- Agregar el campo NIA a la tabla estudiantes
+ALTER TABLE estudiantes
+ADD COLUMN NIA CHAR(8) NOT NULL UNIQUE;
+
+-- Agregar el campo código a la tabla curso
+ALTER TABLE curso
+ADD COLUMN codigo CHAR(3) NOT NULL;
+
+```
+
+
 ## DTOs
 
 Crea los DTO correspondientes. Simplemente que no contengan el id.
