@@ -170,6 +170,7 @@ Debes crear una excepción EstudianteNotFoundException que se lanzará cuando un
 
 Utilizando **@ControllerAdvice**, captura la excepción y devuelve objeto **ErrorDetailDTO.**
 
+
 ### ErrorDetailDTO
 
 Debe contener esta información y usaremos el principio de inmutabilidad:
@@ -180,6 +181,14 @@ Debe contener esta información y usaremos el principio de inmutabilidad:
     private final LocalDateTime timestamp;
     private final int statusCode;
 ```
+
+## Manejo de errores (code status)
+
+Como:
+
+- **404 Not Found:** Si no se encuentra un estudiante, curso o inscripción.
+- **400 Bad Request:** Si los datos de entrada no son válidos (por ejemplo, un NIA o código de curso inválido).
+- **409 Conflict:** Si intentas crear duplicados (como inscribir dos veces al mismo estudiante en el mismo curso).
 
 ## Validaciones
 
