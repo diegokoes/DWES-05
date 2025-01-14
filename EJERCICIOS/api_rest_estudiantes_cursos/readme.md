@@ -230,7 +230,7 @@ Pendiente....
 
 ## Seguridad y Autorización
 
-Para restricciones de acceso, implementaremos autenticación y autorización (usando JWT).
+Para restricciones de acceso, implementaremos autenticación y autorización (usando Spring Authorization Server OAuth 2.1 y Spring Security JWT).
 
 Pendiente...
 
