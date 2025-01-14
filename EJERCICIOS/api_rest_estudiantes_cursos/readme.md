@@ -228,7 +228,7 @@ Pendiente de definir....
 
 Pendiente....
 
-## Seguridad y Autorización:
+## Seguridad y Autorización
 
 Para restricciones de acceso, implementaremos autenticación y autorización (usando JWT).
 
