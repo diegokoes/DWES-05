@@ -20,7 +20,7 @@ Además, se debe implementar un endpoint para inscribir estudiantes en cursos.
 
 **Estudiantes:**
 
-El id se corresponde con el NIA
+El id se corresponde con el NIA del estudiante.
 
 - GET /estudiantes → Listar todos los estudiantes.
 - GET /estudiantes/{id} → Obtener un estudiante por su ID.
@@ -31,7 +31,7 @@ El id se corresponde con el NIA
   
 **Cursos:**
 
-El id se corresponde con del codigo.
+El id se corresponde con del código del curso.
 
 - GET /cursos → Listar todos los cursos.
 - GET /cursos/{id} → Obtener un curso por su ID.
@@ -41,10 +41,13 @@ El id se corresponde con del codigo.
 - PATCH /cursos/{id} → Actualiza parcialmente los atributos de un curso, como su nombre o descripción.
   
 **Inscripciones:**
+
+El idEstudiante es el NIA y el idCurso es el código del curso.
+
 - POST /estudiantes/{idEstudiante}/cursos/{idCurso} → Inscribir un estudiante en un curso.
 - GET /estudiantes/inscripciones → Listado de inscripciones
-- GET /estudiantes/inscripciones/{idCurso} → Listado de inscripciones
-- DELETE /estudiantes/inscripciones/{idEstudiante}/{idCurso} → Borrar a un estudiante del curso
+- GET /estudiantes/inscripciones/{idCurso} → Listado de inscripciones de un curso concreto
+- DELETE /estudiantes/inscripciones/{idEstudiante}/{idCurso} → Dar de baja a un estudiante del curso (desinscribir)
   
 
 ## Script de base de datos H2
