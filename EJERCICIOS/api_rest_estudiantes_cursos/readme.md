@@ -1,6 +1,6 @@
 # Implementar un API REST utilizando Spring Boot para gestionar un sistema de Estudiantes y Cursos
 
-Crea un proyecto Spring Boot llamado NOMBRE_API_ESTUDIANTES... PENDIENTE DEFINIR CÓMO TRABAJAR EN GITHUB!!!!
+Crea un proyecto Spring Boot llamado **NOMBRE_API_ESTUDIANTES**... PENDIENTE DEFINIR CÓMO TRABAJAR EN GITHUB!!!!
 
 ## Requisitos
 
