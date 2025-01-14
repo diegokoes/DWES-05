@@ -136,7 +136,8 @@ INSERT INTO cursos (nombre, descripcion) VALUES
 
 ```
 
-Vamos a añadir unos campos únicos en cada tabla para poder referenciar a los distintos objetos de forma única sin usar la clave primaria id:
+Vamos a añadir unos campos únicos en cada tabla para poder referenciar a los distintos objetos de forma única sin usar la clave primaria id.
+Además, vamos a añadir a la tabla intermedia un campo, llamado fecha_inscripción:
 
 ```
 -- Agregar el campo NIA a la tabla estudiantes
@@ -147,8 +148,53 @@ ADD COLUMN NIA CHAR(8) NOT NULL UNIQUE;
 ALTER TABLE curso
 ADD COLUMN codigo CHAR(3) NOT NULL;
 
-```
+-- Agregar el campo fecha_inscripcion
+ALTER TABLE estudiantes_cursos
+ADD COLUMN fecha_inscripcion DATE NOT NULL;
 
+
+```
+## Entities
+
+En el caso de relaciones manytomany con campos en la tabla intermedia, es necesario crear una clase entidad de dicha tabla de esta manera:
+
+```
+@Entity
+@Table(name = "estudiantes_cursos")
+public class EstudianteCurso {
+
+    @EmbeddedId
+    private EstudianteCursoId id;
+
+    @ManyToOne
+    @MapsId("estudianteId")
+    @JoinColumn(name = "estudiante_id")
+    private Estudiante estudiante;
+
+    @ManyToOne
+    @MapsId("cursoId")
+    @JoinColumn(name = "curso_id")
+    private Curso curso;
+
+    @Column(name = "fecha_inscripcion", nullable = false)
+    private LocalDate fechaInscripcion;
+
+    // Getters y Setters
+
+}
+```
+La clave compuesta EstudianteCursoId se define como @Embeddable:
+
+```
+@Embeddable
+public class EstudianteCursoId implements Serializable {
+
+    private Long estudianteId;
+    private Long cursoId;
+
+    ...
+}
+```
 
 ## DTOs
 
