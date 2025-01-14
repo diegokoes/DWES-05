@@ -194,7 +194,22 @@ A la hora de persistir en la base de datos debes de tener en cuenta las siguient
 
 ## Fichero de propiedades externo.
 
-configuration.properties ....
+En un fichero de propiedades externo, definir variables de configuración.
+
+Completad la clase ApiConfig:
+
+```
+@Configuration
+@ConfigurationProperties(prefix = "config.api.")
+@PropertySources({
+        @PropertySource(value="classpath:configuration.properties", encoding = "UTF-8"),
+})
+@Data
+@NoArgsConstructor
+public class ApiConfig {
+    ...
+}
+```
 
 ## Logging de errores
 
@@ -202,4 +217,5 @@ Pendiente de definir....
 
 ## Paginación
 
+Pendiente....
 
