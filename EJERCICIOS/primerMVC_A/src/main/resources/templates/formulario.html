@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de producto</title>
+</head>
+<body>
+
+    <h1 th:text="${producto.sku == null ? 'Nuevo producto':'Editar producto' }"></h1>
+
+    <form th:action="@{${producto.sku == null ? '/productos/guardar':'/productos/actualizar'}}"
+          th:object="${producto}" method="post">
+
+        <label for="nombre">Nombre</label>
+        <input type="text" th:field="*{nombre}" required/>
+
+        <label for="precio">Precio</label>
+        <input type="text" th:field="*{precio}" required/>
+
+        <label for="sku">SKU</label>
+        <input type="text" th:field="*{sku}" required/>
+
+        <button type="submit">Guardar</button>
+
+    </form>
+
+    <a th:href="@{ ${producto.sku == null ? '/index.html':'/productos' }}">Volver</a>
+
+</body>
+</html>
