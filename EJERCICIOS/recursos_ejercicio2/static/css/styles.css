@@ -31,7 +31,7 @@ section p {
     margin-bottom: 20px;
 }
 
-a.btn {
+a.btn, button.btn {
     display: inline-block;
     background-color: #4CAF50;
     color: white;
@@ -42,7 +42,7 @@ a.btn {
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
-a.btn:hover {
+a.btn:hover, button.btn:hover {
     background-color: #45a049;
 }
 
@@ -151,3 +151,74 @@ td {
     cursor: not-allowed;
 }
 
+/* Estilo del formulario */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 500px;
+    margin: 20px auto;
+    text-align: left;
+}
+
+form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #4CAF50;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+form input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+form input:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+form button {
+    display: block;
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+form a {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #4CAF50;
+    text-align: center;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+form a:hover {
+    color: #388e3c;
+}
