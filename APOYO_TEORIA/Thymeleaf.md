@@ -104,6 +104,18 @@ Si necesitas establecer un valor inicial o predeterminado en un campo, puedes us
 
 Esto establece el valor del campo de entrada en el valor de producto.nombre.
 
+## 2.7. Utility Objects
+
+El símbolo # indica que estás accediendo a un utility object. Algunos de los más comunes en Thymeleaf son:
+
+- **#fields:** Para trabajar con formularios y validaciones.
+- #dates:** Para manejar fechas y operaciones relacionadas.
+- **#numbers: Para trabajar con números y formateo.
+- **#strings:** Para manipular cadenas (por ejemplo, concatenar, dividir, etc.).
+- **#lists:** Para trabajar con listas.
+- **#maps:** Para manejar mapas (diccionarios).
+- **#temporals:** Para trabajar con fechas y tiempos usando la API de Java 8+.
+
 # 3. Resumen de las expresiones clave
 
 - **${...}:** Se utiliza para mostrar el valor de una propiedad del modelo.
