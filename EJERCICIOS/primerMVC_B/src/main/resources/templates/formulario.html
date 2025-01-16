@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de producto</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+  <h1 th:text="${producto.sku == null ? 'Nuevo Producto':'Editar producto'}"></h1>
+
+  <p>Errores en el modelo: <span th:text="${#fields.errors}"></span></p>
+
+
+  <form th:action="@{${producto.sku == null ? '/productos/guardar':'/productos/actualizar'}}"
+        th:object="${producto}" method="post">
+
+    <label for="nombre">Nombre</label>
+    <input type="text" th:field="*{nombre}" required/>
+    <p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
+
+    <label for="precio">Precio</label>
+    <input type="text" th:field="*{precio}" required/>
+    <p th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></p>
+
+    <label for="sku">SKU</label>
+    <input type="text" th:field="*{sku}" required/>
+    <p th:if="${#fields.hasErrors('sku')}" th:errors="*{sku}"></p>
+
+
+    <button type="submit">Guardar</button>
+  </form>
+
+  <a th:href="@{/productos}" >Volver</a>
+</body>
+</html>
