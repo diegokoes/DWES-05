@@ -109,8 +109,8 @@ Esto establece el valor del campo de entrada en el valor de producto.nombre.
 El símbolo # indica que estás accediendo a un utility object. Algunos de los más comunes en Thymeleaf son:
 
 - **#fields:** Para trabajar con formularios y validaciones.
-- #dates:** Para manejar fechas y operaciones relacionadas.
-- **#numbers: Para trabajar con números y formateo.
+- **#dates:** Para manejar fechas y operaciones relacionadas.
+- **#numbers:** Para trabajar con números y formateo.
 - **#strings:** Para manipular cadenas (por ejemplo, concatenar, dividir, etc.).
 - **#lists:** Para trabajar con listas.
 - **#maps:** Para manejar mapas (diccionarios).
