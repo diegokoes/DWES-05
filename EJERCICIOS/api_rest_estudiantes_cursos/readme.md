@@ -129,6 +129,18 @@ CREATE TABLE estudiantes_cursos (
     FOREIGN KEY (curso_id) REFERENCES cursos(id) ON DELETE CASCADE
 );
 
+-- Agregar el campo NIA a la tabla estudiantes
+ALTER TABLE estudiantes
+ADD COLUMN NIA CHAR(8) NOT NULL UNIQUE;
+
+-- Agregar el campo código a la tabla curso
+ALTER TABLE cursos
+ADD COLUMN codigo CHAR(3) NOT NULL;
+
+-- Agregar el campo fecha_inscripcion
+ALTER TABLE estudiantes_cursos
+ADD COLUMN fecha_inscripcion DATE NOT NULL;
+
 -- Datos de prueba
 INSERT INTO estudiantes (nombre, email,nia) VALUES 
 ('Juan Pérez', 'juan.perez@example.com','12345678'),
