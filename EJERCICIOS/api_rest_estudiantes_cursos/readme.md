@@ -131,14 +131,14 @@ CREATE TABLE estudiantes_cursos (
 
 -- Datos de prueba
 INSERT INTO estudiantes (nombre, email) VALUES 
-('Juan Pérez', 'juan.perez@example.com'),
-('María López', 'maria.lopez@example.com'),
-('Carlos Gómez', 'carlos.gomez@example.com');
+('Juan Pérez', 'juan.perez@example.com','12345678'),
+('María López', 'maria.lopez@example.com','12345679'),
+('Carlos Gómez', 'carlos.gomez@example.com','12345671');
 
 INSERT INTO cursos (nombre, descripcion) VALUES 
-('Matemáticas', 'Curso de matemáticas básicas'),
-('Programación Java', 'Curso introductorio a Java y Spring Boot'),
-('Historia', 'Historia mundial desde 1900');
+('Matemáticas', 'Curso de matemáticas básicas','MAT'),
+('Programación Java', 'Curso introductorio a Java y Spring Boot','PRO'),
+('Historia', 'Historia mundial desde 1900','HIS');
 
 ```
 Como algunos de vosotros ya tiene la base de datos creada y he detectado la necesidad de añadir unos nuevos campos, os paso unos scripts para actualizarla.
