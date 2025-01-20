@@ -130,12 +130,12 @@ CREATE TABLE estudiantes_cursos (
 );
 
 -- Datos de prueba
-INSERT INTO estudiantes (nombre, email) VALUES 
+INSERT INTO estudiantes (nombre, email,nia) VALUES 
 ('Juan Pérez', 'juan.perez@example.com','12345678'),
 ('María López', 'maria.lopez@example.com','12345679'),
 ('Carlos Gómez', 'carlos.gomez@example.com','12345671');
 
-INSERT INTO cursos (nombre, descripcion) VALUES 
+INSERT INTO cursos (nombre, descripcion,codigo) VALUES 
 ('Matemáticas', 'Curso de matemáticas básicas','MAT'),
 ('Programación Java', 'Curso introductorio a Java y Spring Boot','PRO'),
 ('Historia', 'Historia mundial desde 1900','HIS');
