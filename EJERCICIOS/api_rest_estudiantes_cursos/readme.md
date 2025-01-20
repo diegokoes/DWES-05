@@ -152,7 +152,7 @@ ALTER TABLE estudiantes
 ADD COLUMN NIA CHAR(8) NOT NULL UNIQUE;
 
 -- Agregar el campo código a la tabla curso
-ALTER TABLE curso
+ALTER TABLE cursos
 ADD COLUMN codigo CHAR(3) NOT NULL;
 
 -- Agregar el campo fecha_inscripcion
