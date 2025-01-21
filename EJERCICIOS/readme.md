@@ -532,7 +532,9 @@ Chuleta Thymeleaf: https://github.com/profeMelola/DWES-05-2024-25/blob/main/APOY
 
 ## Ampliación 2: reactivo (asíncrono)
 
-## Ampliación 3: creación de logs por consola y en archivos
+# EJERCICIO 3: creación de logs por consola y en archivos
+
+Primero vamos a crear un nuevo proyecto llamado **GestionExcepciones** donde haremos un RestController muy sencillo que nos permitirá usar excepciones propias y además crear trazas cuando se produzca dicha excepción.
 
 Vamos a añadir trazas a logs por consola y en ficheros en el servidor usando SLF4J y Logback **(revisar la teoría en el aula virtual de la UT05, "Logging en Java".**
 
