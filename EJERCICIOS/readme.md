@@ -549,10 +549,11 @@ Por ejemplo, puedes habilitar logs en un archivo simple con:
 logging.file.name=logs/application.log
 
 # Tamaño máximo del archivo antes de rotar
-logging.file.max-size=10MB
+logging.logback.rollingpolicy.max-file-size=10MB
 
 # Número máximo de archivos de respaldo
-logging.file.total-size-cap=100MB
+logging.logback.rollingpolicy.total-size-cap=100MB
+
 
 # Nivel de logs global
 logging.level.root=INFO
