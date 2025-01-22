@@ -1,5 +1,9 @@
 # Ejercicios de ampliación y refuerzo
 
+- **Aplicación web:** Una solución completa con interfaz gráfica de usuario, diseñada para ser interactuada directamente por los usuarios a través de un navegador.
+
+- **API REST:** Una interfaz de programación que permite a otras aplicaciones (o sistemas) interactuar con los datos y la lógica de vuelos, sin preocuparse de cómo se presenta esa información al usuario final.
+
 ## Ejercicio 1: gestión de vuelos
 
 Crea una aplicación que ofrezca unos servicios web para la gestión de vuelos. 
