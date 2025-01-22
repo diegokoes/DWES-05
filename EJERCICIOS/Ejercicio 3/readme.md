@@ -202,3 +202,64 @@ Si deseas que los logs se guarden en diferentes archivos según el nivel (INFO, 
     </root>
 </configuration>
 ```
+
+### A APLICAR EN NUESTRO PROYECTO
+
+- Mostrar todos los logs por consola, tanto de Spring como del paquete es.daw.
+- Guardar las trazas del paquete es.daw en un archivo específico llamado daw.log
+- Configurar application.log para que registre solo los logs de Spring (es decir, los logs que no sean del paquete es.daw).
+
+```
+<configuration>
+
+    <!-- Appender para la consola (todos los logs) -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender para daw.log (todos los logs del paquete es.daw) -->
+    <appender name="DAW_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/daw.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/daw.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory> <!-- Mantener los últimos 30 días -->
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender para application.log (solo logs de Spring) -->
+    <appender name="APPLICATION_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/application.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/application.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory> <!-- Mantener los últimos 30 días -->
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logger para el paquete es.daw (todos los niveles) -->
+    <logger name="es.daw" level="TRACE" additivity="false">
+        <!-- Enviar todos los logs de es.daw al archivo daw.log -->
+        <appender-ref ref="DAW_LOG" />
+    </logger>
+
+    <!-- Logger para Spring (excluyendo es.daw) -->
+    <logger name="org.springframework" level="TRACE" additivity="false">
+        <!-- Solo los logs de Spring (y no de es.daw) van a application.log -->
+        <appender-ref ref="APPLICATION_LOG" />
+    </logger>
+
+    <!-- Logger raíz (general para el resto de la aplicación) -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+</configuration>
+
+```
