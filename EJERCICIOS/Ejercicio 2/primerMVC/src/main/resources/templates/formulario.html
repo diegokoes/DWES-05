@@ -6,6 +6,7 @@
   <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
 </head>
 <body>
+  <!-- no lo pinta -->
   <h1 th:text="${producto.sku == null ? 'Nuevo Producto':'Editar producto'}"></h1>
 
   <p>Errores en el modelo: <span th:text="${#fields.errors}"></span></p>
@@ -22,8 +23,8 @@
     <input type="text" th:field="*{precio}" required/>
     <p th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></p>
 
-    <label for="sku">SKU</label>
-    <input type="text" th:field="*{sku}" required/>
+    <label for="sku">SKU <span th:text="${producto.sku != null ? producto.sku:''}"></span></label>
+    <input type="text" th:field="*{sku}" th:attr="hidden=${producto.sku != null}" required/>
     <p th:if="${#fields.hasErrors('sku')}" th:errors="*{sku}"></p>
 
 

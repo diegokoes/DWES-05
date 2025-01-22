@@ -6,12 +6,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -117,12 +121,14 @@ public class ProductoController {
     // -----------------------------------------------------
     @PostMapping("/guardar")
     // BindingResult captura cualquier error de validación
-    public String guardarProducto(@Valid @ModelAttribute ProductoDTO producto, BindingResult result, Model model) {
-
+    public String guardarProducto(@Valid @ModelAttribute("producto") ProductoDTO producto, BindingResult result, Model model) {
+        System.out.println("Errores para 'producto': " + result.getFieldErrors());
         if (result.hasErrors()) {
             System.out.println("****** HAY ERRORES *********");
             result.getAllErrors().forEach(error -> System.out.println(error.toString()));
             System.out.println("****************************");
+
+            producto.setSku(null);
 
             model.addAttribute("producto", producto);
             return "formulario";
@@ -135,6 +141,7 @@ public class ProductoController {
                 .retrieve()
                 .bodyToMono(Void.class) // No quiero procesar la respuesta
                 .block();
+
         return "redirect:/productos";
 
     }
@@ -156,18 +163,49 @@ public class ProductoController {
 
     // endpoint que se invoca desde el formulario (action = /productos/actualizar)
     @PostMapping("/actualizar")
-    public String actualizarProducto(@ModelAttribute ProductoDTO producto) {
+    public String actualizarProducto(@Valid @ModelAttribute("producto") ProductoDTO producto, BindingResult result, Model model) {
 
+        System.out.println("********** ACTUALIZAR **********");
+        System.out.println(producto);
+        System.out.println("*****************************");
+
+        if (result.hasErrors()) {
+            System.out.println("****** HAY ERRORES DE VALIDACIÓN *********");
+            result.getAllErrors().forEach(error -> System.out.println(error.toString()));
+            System.out.println("****************************");
+
+            //model.addAttribute("producto", producto);
+            return "formulario";
+
+        }
+
+        try {
             webClient.put()
-                    .uri(BASE_URL+"/update-sku/"+producto.getSku())
+                    .uri(BASE_URL + "/update-sku")
                     .bodyValue(producto)
                     .retrieve()
+                    //.onStatus(HttpStatusCode::isError, clientresponse ->{ Mono.error....})
                     .bodyToMono(Void.class)
                     .block();
+        }catch (WebClientResponseException e){
 
-            return "redirect:/productos"; // se pinte de nuevo la lista de productos...
+            System.out.println(e.getMessage());
+
+            if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
+                model.addAttribute("error", HttpStatus.NOT_FOUND);
+                model.addAttribute("detalleError", "No existe el producto con sku "+producto.getSku());
+            }
+
+            // Puedo controlar diferentes statusCode
+            return "error";
+        }
+
+        return "redirect:/productos"; // se pinte de nuevo la lista de productos...
 
 
     }
+
+
+
 
 }
