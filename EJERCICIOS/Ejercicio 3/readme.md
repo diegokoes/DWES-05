@@ -18,23 +18,30 @@ Por ejemplo, puedes habilitar logs en un archivo simple con:
 logging.file.name=logs/application.log
 
 # Tamaño máximo del archivo antes de rotar
+# Cuando el archivo de log application.log alcance los 10MB, se renombrará (generalmente con un sufijo, como application-1.log) y se iniciará un nuevo archivo.
 logging.logback.rollingpolicy.max-file-size=10MB
 
 # Número máximo de archivos de respaldo
+# Si el tamaño combinado de todos los archivos de respaldo supera 100MB, los archivos más antiguos se eliminarán automáticamente para liberar espacio.
 logging.logback.rollingpolicy.total-size-cap=100MB
 
-
 # Nivel de logs global
+# El nivel INFO significa que se registrarán mensajes de nivel INFO o superior (INFO, WARN, ERROR, FATAL).
+# Los mensajes de niveles más bajos, como DEBUG o TRACE, no se mostrarán a menos que se configure específicamente para ciertos paquetes o clases.
 logging.level.root=INFO
 
 # Configurar niveles para paquetes específicos
 logging.level.org.springframework=DEBUG
-logging.level.com.mi.paquete=TRACE
+
+# El nivel TRACE es el más detallado y normalmente incluye información muy granular, como la entrada y salida de métodos.
+logging.level.es.daw.excepciones.gestionexcepciones.controller=TRACE
 ```
 
 ### Configuración básica en logback-spring.xml
 
-Necesitas personalizar un archivo de configuración de Logback. Crea un archivo llamado **logback-spring.xml en el directorio src/main/resources.**
+Necesitas personalizar un archivo de configuración de Logback. 
+
+Crea un archivo llamado **logback-spring.xml en el directorio src/main/resources.**
 
 Aquí tienes un ejemplo básico de configuración:
 
