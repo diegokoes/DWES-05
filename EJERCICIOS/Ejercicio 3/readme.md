@@ -141,4 +141,64 @@ Si deseas que los logs se guarden en diferentes archivos según el nivel (INFO, 
 - Los logs de nivel ERROR se guardarán en logs/error.log.
 - Los logs rotarán diariamente y se conservarán solo los últimos 30 días.
 
+### También ese pueden crear logs para diferentes paquetes
 
+```
+<configuration>
+    <!-- Definir el formato de los logs -->
+    <encoder>
+        <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+
+    <!-- Appender para los logs generales -->
+    <appender name="GENERAL_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/general.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/general-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory> <!-- Guardar logs de los últimos 30 días -->
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender para el paquete "es.daw.excepciones" -->
+    <appender name="EXCEPTIONS_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/exceptions.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/exceptions-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender para el paquete "org.springframework" -->
+    <appender name="SPRING_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/spring.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/spring-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logger para el paquete "es.daw.excepciones" -->
+    <logger name="es.daw.excepciones" level="DEBUG" additivity="false">
+        <appender-ref ref="EXCEPTIONS_LOG" />
+    </logger>
+
+    <!-- Logger para el paquete "org.springframework" -->
+    <logger name="org.springframework" level="INFO" additivity="false">
+        <appender-ref ref="SPRING_LOG" />
+    </logger>
+
+    <!-- Logger global para el resto de la aplicación -->
+    <root level="INFO">
+        <appender-ref ref="GENERAL_LOG" />
+    </root>
+</configuration>
+```
