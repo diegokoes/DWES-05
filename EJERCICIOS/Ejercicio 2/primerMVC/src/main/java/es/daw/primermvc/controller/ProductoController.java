@@ -129,7 +129,13 @@ public class ProductoController {
             System.out.println("****************************");
 
             producto.setSku(null);
-
+            /*
+            Spring conserva el estado de los valores enviados previamente al formulario si hay errores de validación,
+            y estos tienen prioridad sobre los valores que introduces manualmente en el modelo (como el producto.setSku(null);)
+            
+            La página se renderiza con sku a null (sale bien el título y el input no es hidden) 
+            y los datos del formulario se mantienen (sale bien el sku y no un null)
+             */
             model.addAttribute("producto", producto);
             return "formulario";
 
