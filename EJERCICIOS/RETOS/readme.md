@@ -1,4 +1,4 @@
-# Reto Cookie en Spring MVVC
+# Reto Cookie en Spring MVC
 
 Usa el proyecto que te proporciono y ampíalo para obtener la funcionalidad que observas en las imágenes.
 
