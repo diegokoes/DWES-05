@@ -1,6 +1,12 @@
 # Reto Cookie en Spring MVVC
 
-Usa el proyecto que te proporciono.....
+Usa el proyecto que te proporciono y ampíalo para obtener la funcionalidad que observas en las imágenes.
+
+En el proyecto hay un ControladorRest que solo te sirve como base para ver métodos de gestión de cookies.
+
+Crea un @Controller MVC que interactúe con las plantillas Thymleaf que debes modificar.
+
+___
 
 ![image](https://github.com/user-attachments/assets/84e1c661-d446-469b-a69e-7dc9cc700057)
 
