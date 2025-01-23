@@ -1,0 +1,16 @@
+2025-01-23 12:55:38 [main] INFO  es.daw.cookies.CookiesApplication - Starting CookiesApplication using Java 17.0.1 with PID 8296 (F:\IdeaProjects\CASA\Cookies\target\classes started by melol in F:\IdeaProjects\CASA\Cookies)
+2025-01-23 12:55:38 [main] DEBUG es.daw.cookies.CookiesApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-23 12:55:38 [main] INFO  es.daw.cookies.CookiesApplication - No active profile set, falling back to 1 default profile: "default"
+2025-01-23 12:55:42 [main] INFO  es.daw.cookies.CookiesApplication - Started CookiesApplication in 4.449 seconds (process running for 5.045)
+2025-01-23 12:56:01 [main] INFO  es.daw.cookies.CookiesApplication - Starting CookiesApplication using Java 17.0.1 with PID 21356 (F:\IdeaProjects\CASA\Cookies\target\classes started by melol in F:\IdeaProjects\CASA\Cookies)
+2025-01-23 12:56:01 [main] DEBUG es.daw.cookies.CookiesApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-23 12:56:01 [main] INFO  es.daw.cookies.CookiesApplication - No active profile set, falling back to 1 default profile: "default"
+2025-01-23 12:56:04 [main] INFO  es.daw.cookies.CookiesApplication - Started CookiesApplication in 3.573 seconds (process running for 4.081)
+2025-01-23 13:35:29 [main] INFO  es.daw.cookies.CookiesApplication - Starting CookiesApplication using Java 17.0.1 with PID 16824 (F:\IdeaProjects\CASA\Cookies\target\classes started by melol in F:\IdeaProjects\CASA\Cookies)
+2025-01-23 13:35:29 [main] DEBUG es.daw.cookies.CookiesApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-23 13:35:29 [main] INFO  es.daw.cookies.CookiesApplication - No active profile set, falling back to 1 default profile: "default"
+2025-01-23 13:35:32 [main] INFO  es.daw.cookies.CookiesApplication - Started CookiesApplication in 3.791 seconds (process running for 4.441)
+2025-01-23 13:36:49 [main] INFO  es.daw.cookies.CookiesApplication - Starting CookiesApplication using Java 17.0.1 with PID 15148 (F:\IdeaProjects\CASA\Cookies\target\classes started by melol in F:\IdeaProjects\CASA\Cookies)
+2025-01-23 13:36:49 [main] DEBUG es.daw.cookies.CookiesApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-23 13:36:49 [main] INFO  es.daw.cookies.CookiesApplication - No active profile set, falling back to 1 default profile: "default"
+2025-01-23 13:36:52 [main] INFO  es.daw.cookies.CookiesApplication - Started CookiesApplication in 3.578 seconds (process running for 4.249)

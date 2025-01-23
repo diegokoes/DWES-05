@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Página de Login</title>
+</head>
+<body>
+<h1> ?????</h1>
+<form action="" method="post">
+    <label for="genre">Selecciona tu género literario favorito:</label>
+    <select name="valor" id="genre">
+        <option value="fantasia">Fantasía</option>
+        <option value="ciencia-ficcion">Ciencia Ficción</option>
+        <option value="misterio">Misterio</option>
+        <option value="romance">Romance</option>        <!-- Agrega más opciones según sea necesario -->
+    </select>
+    <button type="submit">Guardar Preferencia</button>
+</form>
+<a th:href="@{/index.html}" >Volver</a>
+</body>
+</html>
