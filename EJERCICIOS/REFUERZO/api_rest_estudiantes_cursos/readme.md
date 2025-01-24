@@ -28,7 +28,6 @@ El id se corresponde con el NIA del estudiante.
     {
       "nia": "12345678",
       "nombre": "Juan Pérez",
-      "edad": 20,
       "correo": "juan.perez@example.com",
       "cursos": [{
         "codigo": "101",
@@ -39,7 +38,6 @@ El id se corresponde con el NIA del estudiante.
     {
       "nia": "87654321",
       "nombre": "Ana López",
-      "edad": 22,
       "correo": "ana.lopez@example.com",
       "cursos": [{
           "codigo": "102",
@@ -56,7 +54,6 @@ El id se corresponde con el NIA del estudiante.
     {
       "nia": "45678912",
       "nombre": "Carlos Gómez",
-      "edad": 19,
       "correo": "carlos.gomez@example.com",
       "cursos": null
     }
