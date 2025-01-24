@@ -4,7 +4,9 @@ Usa el proyecto que te proporciono y ampíalo para obtener la funcionalidad que 
 
 En el proyecto hay un ControladorRest que solo te sirve como base para ver métodos de gestión de cookies (tipo chuleta). **No debes usar el controlador rest!!!!**
 
-Crea un @Controller MVC que interactúe con las plantillas Thymleaf que debes modificar.
+Crea un @Controller MVC que:
+- Interactúe con las plantillas Thymleaf que debes modificar.
+- Gestione la cookie donde se guarda la preferencia.
 
 ___
 
