@@ -116,6 +116,16 @@ El símbolo # indica que estás accediendo a un utility object. Algunos de los m
 - **#maps:** Para manejar mapas (diccionarios).
 - **#temporals:** Para trabajar con fechas y tiempos usando la API de Java 8+.
 
+## 2.8. Atributos dinámicos
+
+**th:attr** es un atributo de Thymeleaf que te permite establecer atributos HTML dinámicamente en tus elementos. Es muy útil cuando necesitas agregar o modificar atributos en función de condiciones específicas en tu aplicación.
+
+Ejemplo. El atributo hiiden aparecerá dependiendo de si el sku es nulo o no:
+
+```
+<input id="sku" th:attr="hidden=${producto.sku != null}" type="text"/>
+```
+
 # 3. Resumen de las expresiones clave
 
 - **${...}:** Se utiliza para mostrar el valor de una propiedad del modelo.
