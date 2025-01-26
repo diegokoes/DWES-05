@@ -284,7 +284,7 @@ public class ApiConfig {
 
 ## Logging de errores
 
-Pendiente de definir....
+Crea un fichero de log con "SLF4J + logback" específico para esta aplicación donde guardar todas las trazas de tu proyecto.
 
 ## Paginación
 
@@ -294,10 +294,38 @@ Pendiente....
 
 Para restricciones de acceso, implementaremos autenticación y autorización (usando Spring Authorization Server OAuth 2.1 y Spring Security JWT).
 
-Pendiente...
+Pendiente definir ...
+
 
 ## Documentación
 
 Proporciona documentación clara (por ejemplo, usando Swagger/OpenAPI) para que los desarrolladores puedan interactuar fácilmente con tu API.
 
-Pendiente...
+Pendiente definir...
+
+## HATEOAS
+
+HATEOAS (Hypermedia as the Engine os Application State) es un principio arquitectónico donde cada respuesta incluye enlaces relevantes para navegar por la API. 
+
+Esto hace que la API sea autodescriptiva y más fácil de explorar, ya que el cliente puede seguir los enlaces sin necesidad de saber todos los endpoints de antemano.
+
+Por ejemplo, un cliente que accede a /products podría recibir una respuesta como esta:
+
+```
+{
+  "numero":1,
+  "concepto":"informatica",
+  "importe":700.0,
+  "links":[
+      {
+        "rel":"self",
+        "href":"http://localhost:8080/facturas/1"},
+        {
+          "rel":"lineas",
+          "href":"http://localhost:8080/facturas/1/lineas"
+        }
+  ]
+}
+```
+
+A la hora de implementar HATEOAS tendremos siempre que tener en cuenta que también implica una mayor complejidad a la hora de construir y gestionar los Recursos que tenemos por lo tanto antes de implementarla hay que pensarlo a detalle y hacerlo desde el primer momento.
