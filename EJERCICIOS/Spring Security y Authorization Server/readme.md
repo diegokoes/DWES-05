@@ -1,3 +1,5 @@
+Pendiente.....
+
 # Introducción a Spring Security JWT
 
 - JSON Web Token, cómo funciona y sus componentes (header, payload, signature).
