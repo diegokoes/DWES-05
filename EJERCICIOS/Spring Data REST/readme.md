@@ -6,13 +6,13 @@
  
  ___
 
-# Forma de usarlo: RepositoryRestResource + CORS
+## Forma de usarlo: RepositoryRestResource + CORS
 
 CORS (Cross-Origin Resource Sharing) es un mecanismo de seguridad implementado en los navegadores que permite o restringe que los recursos web (como API REST) sean solicitados desde un dominio distinto al de la propia página web. 
 
 Cuando una aplicación en un dominio hace una solicitud (como una petición HTTP) a un servidor en otro dominio, el navegador bloquea esta solicitud por razones de seguridad, a menos que el servidor indique explícitamente que permite dicha solicitud desde ese origen distinto.
 
-## Configuración de CORS solo para el repositorio
+### Configuración de CORS solo para el repositorio
 
  ```
 @CrossOrigin(origins = "http://localhost:5173")
@@ -33,7 +33,7 @@ Los métodos básicos como:
 
 Se generan de manera automática.
 
-## Configuración de CORS a nivel global
+### Configuración de CORS a nivel global
 
 
 ```
@@ -68,3 +68,89 @@ ___
 - Quieres minimizar el código repetitivo para manejar la creación, lectura, actualización y eliminación de recursos.
 - No necesitas personalizar demasiado los endpoints.
 
+___
+
+# EJERCICIO 1: backend productos + integración con cliente React y Angular
+
+Sigue las indicaciones del profesor para crear la aplicación Spring Boot **backend-product**
+
+## Pruebas
+
+Si ejecutas **http://localhost:8080/** obtendrás el siguiente JSON:
+
+```
+{
+  "_links" : {
+    "products" : {
+      "href" : "http://localhost:8080/products"
+    },
+    "profile" : {
+      "href" : "http://localhost:8080/profile"
+    }
+  }
+}
+
+```
+- **products:** Este enlace (http://localhost:8080/products) apunta al recurso de tus productos, que es el endpoint principal para gestionar la entidad Product. Puedes hacer:
+    - GET http://localhost:8080/products → Para listar todos los productos.
+    - POST http://localhost:8080/products → Para crear un nuevo producto.
+    - GET http://localhost:8080/products/{id} → Para obtener un producto específico por su ID.
+    - PUT, PATCH, DELETE, etc., según las operaciones soportadas.
+- **profile:** Este enlace (http://localhost:8080/profile) apunta a la metadata del modelo. Proporciona detalles adicionales sobre las entidades y sus relaciones. Es parte del soporte de Spring Data REST para ALPS (Application-Level Profile Semantics).
+
+## HATEOAS
+
+HATEOAS (Hypermedia as the Engine os Application State) es un principio arquitectónico donde cada respuesta incluye enlaces relevantes para navegar por la API. 
+
+Esto hace que la API sea autodescriptiva y más fácil de explorar, ya que el cliente puede seguir los enlaces sin necesidad de saber todos los endpoints de antemano.
+
+Por ejemplo:
+
+```
+{
+  "numero":1,
+  "concepto":"informatica",
+  "importe":700.0,
+  "links":[
+      {
+        "rel":"self",
+        "href":"http://localhost:8080/facturas/1"},
+        {
+          "rel":"lineas",
+          "href":"http://localhost:8080/facturas/1/lineas"
+        }
+  ]
+}
+```
+
+Spring proporciona herramientas específicas para facilitar esta tarea, en particular el módulo Spring HATEOAS.
+
+Observa el uso de Link y EntityModel (fuera del alcance del curso):
+
+```
+@RestController
+@RequestMapping("/products")
+public class ProductController {
+
+    @GetMapping("/{id}")
+    public EntityModel<Product> getProduct(@PathVariable Long id) {
+        Product product = findProductById(id); // Lógica para obtener el producto
+
+        // Añadir enlaces
+        EntityModel<Product> productModel = EntityModel.of(product,
+                Link.of("/products/" + id, "self"),  // Enlace "self"
+                Link.of("/products", "products"));  // Enlace al listado de productos
+
+        return productModel;
+    }
+}
+
+```
+
+## EJERCICIO 2: integración con React y Angular
+
+Tienes los dos proyectos en el repositorio.
+
+Simplemente debes desplegarlos en tu entorno.
+
+El objetivo no es entender el código de ambas aplicaciones front, sino ver cómo se comunican con el backend implementado en Spring.
