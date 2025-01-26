@@ -1,0 +1,32 @@
+2025-01-22 13:56:22 [main] INFO  e.d.e.g.GestionExcepcionesApplication - Starting GestionExcepcionesApplication using Java 17.0.1 with PID 13464 (F:\IdeaProjects\CASA\GestionExcepciones\target\classes started by melol in F:\IdeaProjects\CASA\GestionExcepciones)
+2025-01-22 13:56:22 [main] DEBUG e.d.e.g.GestionExcepcionesApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-22 13:56:22 [main] INFO  e.d.e.g.GestionExcepcionesApplication - No active profile set, falling back to 1 default profile: "default"
+2025-01-22 13:56:25 [main] INFO  e.d.e.g.GestionExcepcionesApplication - Started GestionExcepcionesApplication in 3.457 seconds (process running for 4.037)
+2025-01-22 13:56:52 [http-nio-8080-exec-1] INFO  e.d.e.g.c.GlobalExceptionHandler - Se ha capturado una excepción ProductoNotFoundException.
+2025-01-22 13:56:52 [http-nio-8080-exec-1] DEBUG e.d.e.g.c.GlobalExceptionHandler - Detalles de la excepción: Producto con SKU 1234589 no encontrado.
+2025-01-22 13:56:52 [http-nio-8080-exec-1] TRACE e.d.e.g.c.GlobalExceptionHandler - ErrorDTO generado: ErrorDTO{message='Error API Productos ', code='404 NOT_FOUND', details={error=Producto con SKU 1234589 no encontrado.}}
+2025-01-22 14:01:18 [http-nio-8080-exec-3] INFO  e.d.e.g.c.GlobalExceptionHandler - Se ha capturado una excepción ProductoNotFoundException.
+2025-01-22 14:01:18 [http-nio-8080-exec-3] DEBUG e.d.e.g.c.GlobalExceptionHandler - Detalles de la excepción: Producto con SKU 1234589 no encontrado.
+2025-01-22 14:01:18 [http-nio-8080-exec-3] TRACE e.d.e.g.c.GlobalExceptionHandler - ErrorDTO generado: ErrorDTO{message='Error API Productos ', code='404 NOT_FOUND', details={error=Producto con SKU 1234589 no encontrado.}}
+2025-01-22 14:05:31 [main] INFO  e.d.e.g.GestionExcepcionesApplication - Starting GestionExcepcionesApplication using Java 17.0.1 with PID 19248 (F:\IdeaProjects\CASA\GestionExcepciones\target\classes started by melol in F:\IdeaProjects\CASA\GestionExcepciones)
+2025-01-22 14:05:31 [main] DEBUG e.d.e.g.GestionExcepcionesApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-22 14:05:31 [main] INFO  e.d.e.g.GestionExcepcionesApplication - No active profile set, falling back to 1 default profile: "default"
+2025-01-22 14:05:35 [main] INFO  e.d.e.g.GestionExcepcionesApplication - Started GestionExcepcionesApplication in 4.019 seconds (process running for 5.208)
+2025-01-22 14:11:46 [http-nio-8080-exec-1] INFO  e.d.e.g.c.GlobalExceptionHandler - Se ha capturado una excepción ProductoNotFoundException.
+2025-01-22 14:11:51 [http-nio-8080-exec-1] DEBUG e.d.e.g.c.GlobalExceptionHandler - Detalles de la excepción: Producto con SKU 1234589 no encontrado.
+2025-01-22 14:13:05 [http-nio-8080-exec-1] TRACE e.d.e.g.c.GlobalExceptionHandler - ErrorDTO generado: ErrorDTO{message='Error API Productos ', code='404 NOT_FOUND', details={error=Producto con SKU 1234589 no encontrado.}}
+2025-01-22 14:14:03 [main] INFO  e.d.e.g.GestionExcepcionesApplication - Starting GestionExcepcionesApplication using Java 17.0.1 with PID 1204 (F:\IdeaProjects\CASA\GestionExcepciones\target\classes started by melol in F:\IdeaProjects\CASA\GestionExcepciones)
+2025-01-22 14:14:03 [main] DEBUG e.d.e.g.GestionExcepcionesApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-22 14:14:03 [main] INFO  e.d.e.g.GestionExcepcionesApplication - No active profile set, falling back to 1 default profile: "default"
+2025-01-22 14:14:06 [main] INFO  e.d.e.g.GestionExcepcionesApplication - Started GestionExcepcionesApplication in 3.917 seconds (process running for 4.641)
+2025-01-22 14:14:43 [http-nio-8080-exec-1] INFO  e.d.e.g.c.GlobalExceptionHandler - Se ha capturado una excepción ProductoNotFoundException.
+2025-01-22 14:14:44 [http-nio-8080-exec-1] DEBUG e.d.e.g.c.GlobalExceptionHandler - Detalles de la excepción: Producto con SKU 1234589 no encontrado.
+2025-01-22 14:14:46 [http-nio-8080-exec-1] TRACE e.d.e.g.c.GlobalExceptionHandler - ErrorDTO generado: ErrorDTO{message='Error API Productos ', code='404 NOT_FOUND', details={error=Producto con SKU 1234589 no encontrado.}}
+2025-01-22 14:17:36 [main] INFO  e.d.e.g.GestionExcepcionesApplication - Starting GestionExcepcionesApplication using Java 17.0.1 with PID 4228 (F:\IdeaProjects\CASA\GestionExcepciones\target\classes started by melol in F:\IdeaProjects\CASA\GestionExcepciones)
+2025-01-22 14:17:36 [main] DEBUG e.d.e.g.GestionExcepcionesApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-22 14:17:36 [main] INFO  e.d.e.g.GestionExcepcionesApplication - No active profile set, falling back to 1 default profile: "default"
+2025-01-22 14:17:39 [main] INFO  e.d.e.g.GestionExcepcionesApplication - Started GestionExcepcionesApplication in 3.541 seconds (process running for 4.067)
+2025-01-22 14:25:02 [main] INFO  e.d.e.g.GestionExcepcionesApplication - Starting GestionExcepcionesApplication using Java 17.0.1 with PID 18012 (F:\IdeaProjects\CASA\GestionExcepciones\target\classes started by melol in F:\IdeaProjects\CASA\GestionExcepciones)
+2025-01-22 14:25:02 [main] DEBUG e.d.e.g.GestionExcepcionesApplication - Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-22 14:25:02 [main] INFO  e.d.e.g.GestionExcepcionesApplication - No active profile set, falling back to 1 default profile: "default"
+2025-01-22 14:25:05 [main] INFO  e.d.e.g.GestionExcepcionesApplication - Started GestionExcepcionesApplication in 3.548 seconds (process running for 4.029)
