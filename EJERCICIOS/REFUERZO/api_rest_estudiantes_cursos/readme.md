@@ -286,24 +286,35 @@ public class ApiConfig {
 
 Crea un fichero de log con "SLF4J + logback" específico para esta aplicación donde guardar todas las trazas de tu proyecto.
 
+
 ## Paginación
 
-Pendiente....
+Revisa el ejercicio sobre paginación...
+___ 
+
+# FUTURIBLES, DESEABLES...
+
+Si no se llega, no se llega...
+
 
 ## Seguridad y Autorización
 
-Para restricciones de acceso, implementaremos autenticación y autorización (usando Spring Authorization Server OAuth 2.1 y Spring Security JWT).
-
 Pendiente definir ...
+
+Para restricciones de acceso, implementaremos autenticación y autorización (usando Spring Authorization Server OAuth 2.1 y Spring Security JWT).
 
 
 ## Documentación
 
-Proporciona documentación clara (por ejemplo, usando Swagger/OpenAPI) para que los desarrolladores puedan interactuar fácilmente con tu API.
-
 Pendiente definir...
 
+Proporciona documentación clara (por ejemplo, usando Swagger/OpenAPI) para que los desarrolladores puedan interactuar fácilmente con tu API.
+
+
+
 ## HATEOAS
+
+Pendiente definir...
 
 HATEOAS (Hypermedia as the Engine os Application State) es un principio arquitectónico donde cada respuesta incluye enlaces relevantes para navegar por la API. 
 
