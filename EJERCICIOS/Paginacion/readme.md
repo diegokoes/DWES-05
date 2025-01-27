@@ -1,4 +1,4 @@
-# Paginar resultados con Spring
+# Paginar resultados con Spring. Práctica guiada
 
 Para paginar los resultados en Spring, el enfoque más común es usar Pageable junto con la interfaz PagingAndSortingRepository o JpaRepository de Spring Data. 
 
