@@ -154,3 +154,49 @@ Tienes los dos proyectos en el repositorio.
 Simplemente debes desplegarlos en tu entorno.
 
 El objetivo no es entender el código de ambas aplicaciones front, sino ver cómo se comunican con el backend implementado en Spring.
+
+## Pasos para ejecutar App React
+
+### Instala Node.js
+
+Para comprobar si tienes node instalado, ejecuta en consola **node -v** o **npm -v**
+
+Para que funcione posteriormente con Angular, instala la versión 18 LTS.
+
+### Instala dependencias
+
+```
+npm install
+```
+
+Si da problemas de permisos, cambia dicha política temporalmente. Ejeucta:
+
+```
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+```
+
+### Ejecuta el servidor de desarrollo
+
+```
+nmp run dev
+```
+
+### Abre la aplicación
+
+http://localhost:5173/
+
+## Pasos para ejecutar App Angular
+
+Damos por hecho que ya tenemos Node.js
+
+### Instalar Angular CLI
+
+```
+npm install -g @angular/cli
+```
+
+### Verifica que Angular CLI esté disponible
+
+```
+ng version
+```
