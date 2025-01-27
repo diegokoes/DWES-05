@@ -128,6 +128,8 @@ En el controlador:
 - Esta carga adicional (es decir, hacer una consulta extra para los estudiantes) puede hacer que las consultas sean menos eficientes, especialmente si tienes muchas relaciones.
 - Si tu aplicación necesita optimizar la carga de los estudiantes y evitar múltiples consultas adicionales (es decir, si los estudiantes son muchos y no quieres que Spring haga una segunda consulta a la base de datos), podrías configurar la carga de la relación para que sea eager (inmediata). 
     - Esto significa que los estudiantes se cargarían al mismo tiempo que el curso, sin necesidad de una consulta adicional.
+    - Ten en cuenta que la relación siempre se carga automáticamente al consultar la entidad principal, sin importar si realmente necesitas los datos de esa relación.
+    - Evítalo para relaciones grandes. Es menos eficiente que usar la JPQL LEFT JOIN FETCH.
 
 ```
 @ManyToMany(fetch = FetchType.EAGER)
