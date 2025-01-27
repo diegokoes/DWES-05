@@ -159,7 +159,13 @@ El objetivo no es entender el código de ambas aplicaciones front, sino ver cóm
 
 ### Instala Node.js
 
-Para comprobar si tienes node instalado, ejecuta en consola **node -v** o **npm -v**
+Para comprobar si tienes node instalado, ejecuta en consola:
+
+```
+node -v 
+
+npm -v
+```
 
 Para que funcione posteriormente con Angular, instala la versión 18 LTS.
 
