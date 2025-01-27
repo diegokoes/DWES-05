@@ -98,7 +98,7 @@ Si ejecutas **http://localhost:8080/** obtendrás el siguiente JSON:
     - PUT, PATCH, DELETE, etc., según las operaciones soportadas.
 - **profile:** Este enlace (http://localhost:8080/profile) apunta a la metadata del modelo. Proporciona detalles adicionales sobre las entidades y sus relaciones. Es parte del soporte de Spring Data REST para ALPS (Application-Level Profile Semantics).
 
-## HATEOAS
+## HATEOAS (solo teoría. La práctica queda fuera del ámbito del módulo)
 
 HATEOAS (Hypermedia as the Engine os Application State) es un principio arquitectónico donde cada respuesta incluye enlaces relevantes para navegar por la API. 
 
