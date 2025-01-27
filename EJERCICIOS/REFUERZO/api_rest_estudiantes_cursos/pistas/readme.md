@@ -87,40 +87,39 @@ public interface CursoRepository extends JpaRepository<Curso, String> {
 }
 ```
 
-En el controlador:
+En el controlador, por ejemplo:
 
 ```
 @GetMapping("/{codigo}")
-    public ResponseEntity<Map<String, Object>> obtenerCurso(@PathVariable String codigo) {
-        Optional<Curso> curso = cursoRepository.findByCodigo(codigo);
+public ResponseEntity<CursoDTO> obtenerCurso(@PathVariable String codigo) {
+    Optional<Curso> curso = cursoRepository.findByCodigo(codigo);
+
+    if (curso.isPresent()) {
+        Curso c = curso.get();
         
-        if (curso.isPresent()){
-            // Construcción del JSON
-            Map<String, Object> response = new HashMap<>();
-            response.put("codigo", curso.getCodigo());
-            response.put("nombre", curso.getNombre());
-            response.put("descripcion", curso.getDescripcion());
-            
-            // Extraer la lista de estudiantes y mapearla a un formato simple
-            List<Map<String, String>> estudiantesInscritos = curso.getEstudiantesInscritos().stream()
-                .map(estudiante -> {
-                    Map<String, String> estudianteData = new HashMap<>();
-                    estudianteData.put("nia", estudiante.getNia());
-                    estudianteData.put("nombre", estudiante.getNombre());
-                    return estudianteData;
-                })
-                .collect(Collectors.toList());
+        // Construir el DTO
+        CursoDTO cursoDTO = new CursoDTO();
+        cursoDTO.setCodigo(c.getCodigo());
+        cursoDTO.setNombre(c.getNombre());
+        cursoDTO.setDescripcion(c.getDescripcion());
 
-            response.put("estudiantesInscritos", estudiantesInscritos);
+        List<EstudianteDTO> estudiantesDTO = c.getEstudiantesInscritos().stream()
+            .map(e -> {
+                EstudianteDTO estudianteDTO = new EstudianteDTO();
+                estudianteDTO.setNia(e.getNia());
+                estudianteDTO.setNombre(e.getNombre());
+                return estudianteDTO;
+            })
+            .collect(Collectors.toList());
 
-            return ResponseEntity.ok(response);
-        }
+        cursoDTO.setEstudiantesInscritos(estudiantesDTO);
 
-        // En el caso de que no exista el curso ......
-
-        ......
-        
+        return ResponseEntity.ok(cursoDTO);
     }
+
+    return ResponseEntity.notFound().build(); // o gestión de una excepción personalizada....
+}
+
 ```
 
 - En una relación @ManyToMany, el FetchType por defecto es LAZY, aunque no lo especifiques explícitamente en la anotación.
