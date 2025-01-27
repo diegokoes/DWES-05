@@ -61,6 +61,17 @@ public class DataRestConfig implements RepositoryRestConfigurer {
 - Es útil si necesitas una configuración global de CORS para todas las rutas de Spring Data REST, especialmente si tienes varios repositorios y quieres asegurarte de que todas las rutas de Spring Data REST (como /products, /orders, etc.) permiten CORS desde tu frontend.
 
 ___
+### Datos de prueba
+
+Crea en resources de tu proyecto un fichero llamado **import.sql**:
+
+```
+INSERT INTO products (name, description, price) VALUES ('Producto 1', 'Descripción 1', 100);
+INSERT INTO products (name, description, price) VALUES ('Producto 2', 'Descripción 2', 200);
+```
+
+
+___
 
 ## ¿Cuándo usar Spring Data REST en lugar de un @RestController?
 
