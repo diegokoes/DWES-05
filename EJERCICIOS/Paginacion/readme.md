@@ -171,3 +171,82 @@ public class ProductoController {
     ...
 }
 ```
+
+# ¿Y paginando una aplicación Spring MVC?
+
+El controlador debe realizar la consulta y controlar la paginación.
+
+```
+
+@Controller
+public class ProductoController {
+
+    @Autowired
+    private ProductoRepository productoRepository;
+
+    @GetMapping("/productos")
+    public String listarProductos(
+            @RequestParam(defaultValue = "0") int page, // Página actual
+            @RequestParam(defaultValue = "10") int size, // Tamaño de página
+            Model model) {
+
+        // Crear la página solicitada
+        Page<Producto> productosPage = productoRepository.findAll(PageRequest.of(page, size));
+
+        // Añadir la página y sus datos al modelo
+        model.addAttribute("productosPage", productosPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", productosPage.getTotalPages());
+
+        return "productos"; // Nombre de la plantilla Thymeleaf
+    }
+}
+
+```
+
+La plantilla de Thymeleaf mostrará los productos paginados con enlaces para navegar entre las páginas:
+
+```
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Productos</title>
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+
+    <!-- Tabla de productos -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="producto : ${productosPage.content}">
+                <td th:text="${producto.id}"></td>
+                <td th:text="${producto.nombre}"></td>
+                <td th:text="${producto.precio}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Navegación de paginación -->
+    <div>
+        <span th:if="${currentPage > 0}">
+            <a th:href="@{/productos(page=${currentPage - 1})}">Anterior</a>
+        </span>
+        <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+            <a th:href="@{/productos(page=${i})}" th:text="${i + 1}"
+               th:classappend="${i == currentPage} ? 'current' : ''"></a>
+        </span>
+        <span th:if="${currentPage < totalPages - 1}">
+            <a th:href="@{/productos(page=${currentPage + 1})}">Siguiente</a>
+        </span>
+    </div>
+</body>
+</html>
+
+```
