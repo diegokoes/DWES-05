@@ -12,3 +12,5 @@ Pendiente.....
 - Configurar Spring Authorization Server: Cómo crear y configurar un servidor de autorización utilizando Spring Authorization Server.
 - Protocolo de autorización: Authorization Code Flow, Implicit Flow, Client Credentials, etc.).
 - Integración con Spring Security y JWT: Cómo usar Spring Authorization Server con Spring Security para emitir tokens de acceso (JWT) y manejar la autorización.
+
+# Interceptores ?????
