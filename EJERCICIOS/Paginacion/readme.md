@@ -160,3 +160,14 @@ public Page<ProductoDTO> findAllDTO(
     return productosDTOPage;
 }
 ```
+
+Para que Spring valide los parámetros y podamos capturar la excepción **ConstraintViolationException**, hay que añadir la anotación **@Validated** al controlador rest.
+
+```
+@RestController
+@RequestMapping("/productos")
+@Validated // Habilita la validación de parámetros
+public class ProductoController {
+    ...
+}
+```
