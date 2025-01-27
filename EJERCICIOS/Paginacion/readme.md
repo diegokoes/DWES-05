@@ -66,44 +66,53 @@ ___
 
 En la respuesta JSON, además de los productos, obtendrás información de la paginación como el total de páginas, el total de elementos, etc...
 
+Por ejemplo, ante esta petición **GET http://localhost:8080/productos/list-dto?page=0&size=3**, se obtiene el siguiente JSON de respuesta:
+
 ```
 {
-    "content": [
-        {
-            "id": 1,
-            "nombre": "Producto 1",
-            "precio": 100.0
-        },
-        {
-            "id": 2,
-            "nombre": "Producto 2",
-            "precio": 150.0
-        }
-        // Otros productos...
-    ],
-    "pageable": {
-        "sort": {
-            "empty": true
-        },
-        "offset": 0,
-        "pageSize": 10,
-        "pageNumber": 0,
-        "unpaged": false,
-        "paged": true
+  "content": [
+    {
+      "nombre": "Producto 1 vaya",
+      "sku": "SKU001",
+      "precio": 1000
     },
-    "totalElements": 100,
-    "totalPages": 10,
-    "last": false,
-    "number": 0,
-    "size": 10,
+    {
+      "nombre": "Producto 2",
+      "sku": "SKU002",
+      "precio": 1500
+    },
+    {
+      "nombre": "Producto 3",
+      "sku": "SKU003",
+      "precio": 2000
+    }
+  ],
+  "pageable": {
+    "pageNumber": 0,
+    "pageSize": 3,
     "sort": {
-        "empty": true
+      "empty": true,
+      "sorted": false,
+      "unsorted": true
     },
-    "first": true,
-    "numberOfElements": 10,
-    "empty": false
+    "offset": 0,
+    "paged": true,
+    "unpaged": false
+  },
+  "last": false,
+  "totalElements": 11,
+  "totalPages": 4,
+  "size": 3,
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": false,
+    "unsorted": true
+  },
+  "first": true,
+  "numberOfElements": 3,
+  "empty": false
 }
-
 ```
 
 ## Ordenación de resultados
