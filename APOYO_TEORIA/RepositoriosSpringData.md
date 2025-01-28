@@ -2,6 +2,8 @@
 
 ![alt text](image.png)
 
+*Fuente: https://medium.com/@pramudaliyanage/query-methods-in-spring-data-jpa-cc043ec07a38*
+
 ## CrudRepository
 
 CrudRepository es una interfaz proporcionada por Spring Data que proporciona métodos genéricos para operaciones CRUD (Create, Read, Update, Delete) en una entidad de dominio.
@@ -134,3 +136,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 Aquí se está ejecutando una consulta SQL nativa en lugar de una consulta JPQL. Por favor, ten en cuenta que las consultas nativas son específicas de la base de datos y no son portables entre diferentes tipos de bases de datos.
 
 Las consultas personalizadas proporcionan un gran nivel de control sobre las operaciones de la base de datos y permiten al desarrollador escribir consultas complejas que no pueden ser fácilmente expresadas a través de las operaciones derivadas del nombre del método.
+
+
+*Fuente: https://certidevs.com/tutorial-spring-boot-repositorios-crud*
