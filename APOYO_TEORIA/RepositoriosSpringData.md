@@ -36,7 +36,7 @@ JpaRepository también proporciona algunas funcionalidades adicionales específi
 
 - **flush():** Aplica todas las operaciones pendientes a la base de datos.
 - **deleteAllInBatch(Iterable<T> entities):** Borra las entidades en un lote, lo que es más eficiente que borrar una por una.
-- **<S extends T> List<S> findAll(Example<S> example):** Soporte para consultas de ejemplo con la API Query By Example.
+- <S extends T> List<S> findAll(Example<S> example): Soporte para consultas de ejemplo con la API Query By Example.
 
 Aquí hay un ejemplo de cómo se puede crear un repositorio UserRepository que extiende JpaRepository:
 
