@@ -157,6 +157,106 @@ public class ProductController {
 }
 
 ```
+## Sobreescribir o modificar endpoints generados automáticamente por Spring Data REST
+
+Aunque Spring Data REST crea automáticamente los endpoints CRUD en base a las interfaces de repositorio (CrudRepository, JpaRepository, etc.), proporciona opciones para personalizarlos o reemplazarlos cuando sea necesario.
+
+### Personalizar los endpoints con métodos en el repositorio
+
+Puedes agregar métodos personalizados en la interfaz de repositorio para ampliar o modificar el comportamiento.
+
+**Ejemplo: Añadir un método de consulta personalizada**
+
+```
+public interface ProductRepository extends CrudRepository<Product, Long> {
+
+    // Consulta personalizada basada en el nombre
+    List<Product> findByNameContainingIgnoreCase(String name);
+}
+```
+
+Esto generará el siguiente endpoint:
+
+```
+GET http://localhost:8080/products/search/findByNameContainingIgnoreCase?name=example
+```
+
+
+### Sobrescribir métodos del CRUD con un @RestController
+
+```
+@RestController
+@RequestMapping("/products")
+public class ProductController {
+
+    private final ProductRepository productRepository;
+
+    public ProductController(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    @PostMapping
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        // Validaciones personalizadas o lógica adicional
+        if (product.getPrice() < 0) {
+            return ResponseEntity.badRequest().body(null);
+        }
+        Product savedProduct = productRepository.save(product);
+        return ResponseEntity.ok(savedProduct);
+    }
+}
+```
+
+- La ruta POST /products gestionada por Spring Data REST será sobrescrita por tu implementación.
+- Otros endpoints como GET /products o DELETE /products/{id} seguirán funcionando como antes.
+
+### Utilizar @RepositoryRestController para personalización
+
+Por ejemplo:
+
+```
+@RepositoryRestController
+public class CustomProductController {
+
+    private final ProductRepository productRepository;
+
+    public CustomProductController(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    @GetMapping("/products/expensive")
+    public ResponseEntity<List<Product>> getExpensiveProducts() {
+        List<Product> expensiveProducts = productRepository.findByPriceGreaterThan(1000L);
+        return ResponseEntity.ok(expensiveProducts);
+    }
+}
+```
+
+Esto agrega un nuevo endpoint a los generados automáticamente:
+
+```
+GET http://localhost:8080/products/expensive
+
+```
+
+### Deshabilitar los endpoints generados automáticamente
+
+```
+@CrossOrigin(origins = {"http://localhost:5173"})
+@RepositoryRestResource(path = "products", exported = true)
+public interface ProductRepository extends CrudRepository<Product, Long> {
+
+    @Override
+    @RestResource(exported = false) // Desactiva DELETE
+    void deleteById(Long id);
+
+    @Override
+    @RestResource(exported = false) // Desactiva POST
+    <S extends Product> S save(S entity);
+}
+
+```
+___
 
 ## EJERCICIO 2: integración con React y Angular
 
