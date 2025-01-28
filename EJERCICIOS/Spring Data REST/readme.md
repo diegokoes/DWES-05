@@ -80,83 +80,6 @@ ___
 - No necesitas personalizar demasiado los endpoints.
 
 ___
-
-# EJERCICIO 1: backend productos + integración con cliente React y Angular
-
-Sigue las indicaciones del profesor para crear la aplicación Spring Boot **backend-product**
-
-## Pruebas
-
-Si ejecutas **http://localhost:8080/** obtendrás el siguiente JSON:
-
-```
-{
-  "_links" : {
-    "products" : {
-      "href" : "http://localhost:8080/products"
-    },
-    "profile" : {
-      "href" : "http://localhost:8080/profile"
-    }
-  }
-}
-
-```
-- **products:** Este enlace (http://localhost:8080/products) apunta al recurso de tus productos, que es el endpoint principal para gestionar la entidad Product. Puedes hacer:
-    - GET http://localhost:8080/products → Para listar todos los productos.
-    - POST http://localhost:8080/products → Para crear un nuevo producto.
-    - GET http://localhost:8080/products/{id} → Para obtener un producto específico por su ID.
-    - PUT, PATCH, DELETE, etc., según las operaciones soportadas.
-- **profile:** Este enlace (http://localhost:8080/profile) apunta a la metadata del modelo. Proporciona detalles adicionales sobre las entidades y sus relaciones. Es parte del soporte de Spring Data REST para ALPS (Application-Level Profile Semantics).
-
-## HATEOAS (solo teoría. La práctica queda fuera del ámbito del módulo)
-
-HATEOAS (Hypermedia as the Engine os Application State) es un principio arquitectónico donde cada respuesta incluye enlaces relevantes para navegar por la API. 
-
-Esto hace que la API sea autodescriptiva y más fácil de explorar, ya que el cliente puede seguir los enlaces sin necesidad de saber todos los endpoints de antemano.
-
-Por ejemplo:
-
-```
-{
-  "numero":1,
-  "concepto":"informatica",
-  "importe":700.0,
-  "links":[
-      {
-        "rel":"self",
-        "href":"http://localhost:8080/facturas/1"},
-        {
-          "rel":"lineas",
-          "href":"http://localhost:8080/facturas/1/lineas"
-        }
-  ]
-}
-```
-
-Spring proporciona herramientas específicas para facilitar esta tarea, en particular el módulo Spring HATEOAS.
-
-Observa el uso de Link y EntityModel (fuera del alcance del curso):
-
-```
-@RestController
-@RequestMapping("/products")
-public class ProductController {
-
-    @GetMapping("/{id}")
-    public EntityModel<Product> getProduct(@PathVariable Long id) {
-        Product product = findProductById(id); // Lógica para obtener el producto
-
-        // Añadir enlaces
-        EntityModel<Product> productModel = EntityModel.of(product,
-                Link.of("/products/" + id, "self"),  // Enlace "self"
-                Link.of("/products", "products"));  // Enlace al listado de productos
-
-        return productModel;
-    }
-}
-
-```
 ## Sobreescribir o modificar endpoints generados automáticamente por Spring Data REST
 
 Aunque Spring Data REST crea automáticamente los endpoints CRUD en base a las interfaces de repositorio (CrudRepository, JpaRepository, etc.), proporciona opciones para personalizarlos o reemplazarlos cuando sea necesario.
@@ -257,6 +180,85 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
 ```
 ___
+
+___
+
+# EJERCICIO 1: backend productos + integración con cliente React y Angular
+
+Sigue las indicaciones del profesor para crear la aplicación Spring Boot **backend-product**
+
+## Pruebas
+
+Si ejecutas **http://localhost:8080/** obtendrás el siguiente JSON:
+
+```
+{
+  "_links" : {
+    "products" : {
+      "href" : "http://localhost:8080/products"
+    },
+    "profile" : {
+      "href" : "http://localhost:8080/profile"
+    }
+  }
+}
+
+```
+- **products:** Este enlace (http://localhost:8080/products) apunta al recurso de tus productos, que es el endpoint principal para gestionar la entidad Product. Puedes hacer:
+    - GET http://localhost:8080/products → Para listar todos los productos.
+    - POST http://localhost:8080/products → Para crear un nuevo producto.
+    - GET http://localhost:8080/products/{id} → Para obtener un producto específico por su ID.
+    - PUT, PATCH, DELETE, etc., según las operaciones soportadas.
+- **profile:** Este enlace (http://localhost:8080/profile) apunta a la metadata del modelo. Proporciona detalles adicionales sobre las entidades y sus relaciones. Es parte del soporte de Spring Data REST para ALPS (Application-Level Profile Semantics).
+
+## HATEOAS (solo teoría. La práctica queda fuera del ámbito del módulo)
+
+HATEOAS (Hypermedia as the Engine os Application State) es un principio arquitectónico donde cada respuesta incluye enlaces relevantes para navegar por la API. 
+
+Esto hace que la API sea autodescriptiva y más fácil de explorar, ya que el cliente puede seguir los enlaces sin necesidad de saber todos los endpoints de antemano.
+
+Por ejemplo:
+
+```
+{
+  "numero":1,
+  "concepto":"informatica",
+  "importe":700.0,
+  "links":[
+      {
+        "rel":"self",
+        "href":"http://localhost:8080/facturas/1"},
+        {
+          "rel":"lineas",
+          "href":"http://localhost:8080/facturas/1/lineas"
+        }
+  ]
+}
+```
+
+Spring proporciona herramientas específicas para facilitar esta tarea, en particular el módulo Spring HATEOAS.
+
+Observa el uso de Link y EntityModel (fuera del alcance del curso):
+
+```
+@RestController
+@RequestMapping("/products")
+public class ProductController {
+
+    @GetMapping("/{id}")
+    public EntityModel<Product> getProduct(@PathVariable Long id) {
+        Product product = findProductById(id); // Lógica para obtener el producto
+
+        // Añadir enlaces
+        EntityModel<Product> productModel = EntityModel.of(product,
+                Link.of("/products/" + id, "self"),  // Enlace "self"
+                Link.of("/products", "products"));  // Enlace al listado de productos
+
+        return productModel;
+    }
+}
+
+```
 
 ## EJERCICIO 2: integración con React y Angular
 
