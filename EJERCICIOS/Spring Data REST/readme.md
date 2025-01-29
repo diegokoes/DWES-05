@@ -220,6 +220,20 @@ public class ProductController {
 
 ```
 
+## HAL Explorer
+
+HAL Explorer es una herramienta basada en navegador que permite explorar APIs RESTful que siguen el formato HAL (Hypertext Application Language). 
+
+En el contexto de Spring, se usa comúnmente junto con Spring HATEOAS para visualizar y navegar APIs que exponen recursos en formato HAL.
+
+**Características de HAL Explorer en Spring:**
+- Exploración de APIs HAL: Permite visualizar respuestas HAL de forma interactiva y navegar por los enlaces embebidos en la API.
+- Integración con Spring HATEOAS: Spring HATEOAS facilita la construcción de APIs REST hipermediales, y HAL Explorer permite interactuar con ellas fácilmente.
+- Interfaz amigable: Presenta los datos en una estructura clara con soporte para expandir enlaces y recorrer recursos relacionados.
+- Soporte para consultas y pruebas: Se pueden realizar peticiones GET y probar otras interacciones con la API desde la interfaz.
+
+___
+
 ## EJERCICIO 2: integración con React y Angular
 
 Tienes los dos proyectos en el repositorio.
