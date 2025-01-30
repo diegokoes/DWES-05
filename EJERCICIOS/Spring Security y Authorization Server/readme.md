@@ -433,6 +433,18 @@ public class AuthController {
 ```
 ## Verificar que funciona
 
+- Inicia la aplicación y accede a http://localhost:8080/h2-console para ver la base de datos.
+- Registra un usuario con POST /auth/register:
+
+```
+{
+    "username": "admin",
+    "password": "password"
+}
+
+```
+- Inicia sesión con POST /auth/login, recibirás un JWT en la respuesta.
+- Usa el JWT para acceder a otros endpoints protegidos.
 
 ___
 # Interceptores ?????
