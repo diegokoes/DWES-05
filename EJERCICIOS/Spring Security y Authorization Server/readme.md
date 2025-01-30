@@ -2,25 +2,23 @@
 
 ## Autenticación vs. Autorización
 
-- **Autenticación:** Verificar la identidad de un usuario.
-- **Autorización:** Determinar qué permisos tiene un usuario autenticado.
+![alt text](image-1.png)
 
 ## JWT (JSON Web Token)
 
-- Un formato de token basado en JSON usado para la autenticación y autorización sin estado.
-- Compuesto por:
-    - Header: Indica el algoritmo de firma (ej. HS256).
-    - Payload: Contiene las reclamaciones (claims) como sub, roles, etc.
-    - Firma: Generada con una clave secreta o certificado.
+![alt text](image-2.png)
 
 ## Spring Security
 
-- Framework de seguridad para aplicaciones Java con Spring.
-- Permite implementar autenticación, autorización y protección contra ataques comunes.
+![alt text](image-3.png)
 
 # Ejemplo Práctico: Implementación de Spring Security con JWT
 
-## Agregar dependencias
+## Crea el proyecto y agregar dependencias
+
+El proyecto Spring Boot debe llamarse **SpringSecurity**.
+
+El "Group" y "Package Name" serán **es.daw.springsecurity**
 
 Buscamos *Security* en Starters del pom.xml:
 
@@ -41,19 +39,17 @@ spring.h2.console.enabled=true
 spring.h2.console.path=/h2-console
 
 # Hacer que Hibernate recree la base de datos en cada reinicio
-spring.jpa.hibernate.ddl-auto=update
+spring.jpa.hibernate.ddl-auto=create-drop
 ```
 
-- Con **create-drop** se crea todoas las tablas automáticamente y se eliminan cuando la aplicación se detiene.
-- Con **update** se conservan las tablas entre ejecuciones.
+- Con **create-drop** se crea todas las tablas automáticamente y se eliminan cuando la aplicación se detiene.
+- Con **update** se conservan las tablas entre ejecuciones. Si en el futuro quieres que los datos persistan entre reinicios, lo adecuado es cambiar la base de datos a file, no mem y configurar update.
 
 ## Cargar datos por defecto
 
 Crear un archivo SQL en src/main/resources/import.sql 
 
 Spring Boot ejecutará automáticamente los scripts SQL ubicados en src/main/resources cuando se arranque la aplicación. 
-
-Pero, necesitas asegurarte de que los scripts de inicialización están habilitados y que la base de datos se cree correctamente.
 
 
 **Contenido de import.sql:**
@@ -159,7 +155,7 @@ public class User implements UserDetails {
 
 ```
 
-**@Builder** permite clear objetos con el patrón Builder:
+NOTA: **@Builder** permite clear objetos con el patrón Builder:
 
 ```
 User user = User.builder()
