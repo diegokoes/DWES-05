@@ -79,8 +79,8 @@ El id se corresponde con del código del curso.
     "nombre": "Matemáticas Básicas",
     "descripcion": "Curso introductorio",
     "estudiantesInscritos": [
-      { "nia": "12345678", "nombre": "Juan Pérez" },
-      { "nia": "87654321", "nombre": "Ana López" }
+      { "nia": "12345678", "nombre": "Juan Pérez", "correo:blabla" },
+      { "nia": "87654321", "nombre": "Ana López", "correo:blabla }
     ]
   }
   ```
