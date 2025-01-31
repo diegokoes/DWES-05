@@ -222,6 +222,7 @@ Además crea **InscripcionDTO** para guardar información combinada del estudian
 - nombreCurso
 
 El endpoint POST /estudiantes/{idEstudiante}/cursos/{idCurso} → Devolverá InscripciónDTO.
+
 El endpoint GET /estudiantes/inscripciones → Devolverá un listado de todas las inscripciones
 
 ## Gestión de excepciones 
