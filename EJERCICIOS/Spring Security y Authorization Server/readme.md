@@ -8,6 +8,8 @@
 
 ![alt text](image-2.png)
 
+![alt text](image-4.png)
+
 ## Spring Security
 
 ![alt text](image-3.png)
@@ -224,6 +226,13 @@ UsernameNotFoundException es una excepción que forma parte de Spring Security
 
 ## Nuevo paquete security
 
+HASTA AQUÍ!!!!! 
+
+![alt text](image-5.png)
+_______
+
+https://www.unlogged.io/post/integrating-jwt-with-spring-security-6-in-spring-boot-3
+
 ### Implementación de JwtUtil
 
 Esta clase genera y valida los tokens JWT.
@@ -256,13 +265,32 @@ Es necesario añadir manualmente la dependencia a **Java JWT**.
 Esta es la clase de utilidades:
 
 ```
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+
+import java.security.Key;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.Claims;
+
 @Component
 public class JwtUtil {
-    private final String SECRET_KEY = "tu_clave_secreta"; // Usa una clave más segura en producción
+    private static final String SECRET_KEY = "tu_clave_secreta_super_segura_de_32_bytes_minimo";
+
+    private Key getSigningKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
 
     public String generateToken(String username) {
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, username);
+        return createToken(new HashMap<>(), username);
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
@@ -271,7 +299,7 @@ public class JwtUtil {
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 hora
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
@@ -289,8 +317,9 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
+        return Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
                 .parseClaimsJws(token)
                 .getBody();
     }
@@ -304,6 +333,7 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 }
+
 ```
 
 ### Implementación de JwtAuthenticationFilter
