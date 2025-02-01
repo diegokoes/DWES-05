@@ -130,16 +130,7 @@ public class EstudiantesController {
 
 
     // GET /estudiantes/{nia}
-    @GetMapping("/{nia}")
-    public ResponseEntity<EstudianteDTO>  getEstudianteByNia(
-            @PathVariable String nia){
-
-        Estudiante estudiante = estudianteRepository.findByNia(nia).orElse(null);
-
-        if (estudiante == null) {
-            return ResponseEntity.notFound().build();
-        }
-
+    // Este es el JSON a devolver
         /*
         {
             "nia": "87654321",
@@ -158,6 +149,23 @@ public class EstudiantesController {
             ]
           }
          */
+
+    @GetMapping("/{nia}")
+    public ResponseEntity<EstudianteDTO>  getEstudianteByNia(
+            @PathVariable String nia){
+
+        // Compruebo si el estudiantes existe. Si no es así, devuelvo un 404
+        Estudiante estudiante = estudianteRepository.findByNia(nia).orElse(null);
+
+        if (estudiante == null) {
+            return ResponseEntity.notFound().build();
+        }
+        // ---------------------------------------
+        // Observa los constructores de los DTO. Además de los proporcionados por Lombok (vacío y con todos los atributos),
+        // hemos creado constructores solo con los atributos principales de cada entidad.
+        
+
+        // PRIMERA FORMA
         // Monto la información principal del estudiante
 //        EstudianteDTO estudianteDTO = new EstudianteDTO(
 //                estudiante.getNia(),
@@ -171,15 +179,16 @@ public class EstudiantesController {
 //                estudiante.getNombre(),
 //                estudiante.getEmail()
 //        );
+//         estudianteDTO.setCursos(cursos);
 
-
+        // SEGUNDA FORMA
         // Monto los cursos incritos por el estudiante
         List<CursoDTO> cursos = estudiante.getCursos().stream()
                 //.map(c -> new CursoDTO(c.getCodigo(),c.getNombre(),c.getDescripcion(),null))
                 .map(c -> new CursoDTO(c.getCodigo(),c.getNombre(),c.getDescripcion()))
                 .toList();
 
-//         estudianteDTO.setCursos(cursos);
+
         EstudianteDTO estudianteDTO2 = new EstudianteDTO(
                 estudiante.getNia(),
                 estudiante.getNombre(),
