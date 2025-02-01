@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIgnoreProperties({"descripcion"})
+//@JsonIgnoreProperties({"descripcion"}) // Ignora la propiedad descripcion al generar el json
 public class CursoDTO {
     private String codigo;
     private String nombre;
