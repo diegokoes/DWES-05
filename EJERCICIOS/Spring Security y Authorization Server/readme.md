@@ -408,3 +408,7 @@ Añadido al método **securityFilterChain** de **SecurityConfig**:
 ### Acceder a /protegido con el Token
 
 ![alt text](image-16.png)
+
+- Authorization → Es la cabecera HTTP estándar para enviar credenciales.
+- Bearer → Indica que se está usando un "Bearer Token" (portador del token).
+- <TOKEN> → Es el JWT generado durante el login.
