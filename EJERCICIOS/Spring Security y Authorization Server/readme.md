@@ -288,13 +288,8 @@ Es necesario añadir manualmente la dependencia a **Java JWT**.
 
 ## AuthController
 
-**POST /auth/login**
 
-    - Recibe un usuario y contraseña.
-    - Autentica al usuario.
-    - Genera un JWT y lo devuelve en la respuesta.
-
-**POST /auth/register**
+### POST /auth/register**
 
     - Recibe un usuario y contraseña.
     - Registra un nuevo usuario en la base de datos.
@@ -308,7 +303,18 @@ Si el usuario ya existe:
 
 ![alt text](image-11.png)
 
-## Problemas de dependencias
+___
+
+### POST /auth/login**
+
+    - Recibe un usuario y contraseña.
+    - Autentica al usuario.
+    - Genera un JWT y lo devuelve en la respuesta.
+
+![alt text](image-14.png)
+
+
+**Problemas de dependencias**
 
 Un error algo así:
 java.lang.IllegalStateException: JJWT implementation not found! Ensure jjwt-impl is in the classpath.
@@ -367,6 +373,27 @@ jar tf target/*.jar | findstr jjwt
 jar tf target/SpringSecurity-0.0.1.jar | findstr MANIFEST.MF
 
 
-TENEMOS QUE EJECUTAR POR consola
+**TENEMOS QUE EJECUTAR POR consola**
 
-ava -jar target/myapp.jar
+java -jar target/myapp.jar
+
+**Error porque la clave secreta para firmar tokens es demasiado débil**
+
+```
+2025-02-04 17:03:51 - Secured POST /auth/login
+2025-02-04 17:03:51 - POST "/auth/login", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2025-02-04 17:03:51 - Mapped to es.daw.springsecurity.controller.AuthController#login(AuthRequest)
+2025-02-04 17:03:51 - Read "application/json;charset=UTF-8" to [AuthRequest(username=usuario1, password=password1)]
+2025-02-04 17:03:51 - Arguments: [AuthRequest(username=usuario1, password=password1)]
+2025-02-04 17:03:52 - Authenticated user
+2025-02-04 17:03:52 - Failed to complete request
+io.jsonwebtoken.security.WeakKeyException: The specified key byte array is 232 bits which is not secure enough for any JWT HMAC-SHA algorithm.  The JWT JWA Specification (RFC 7518, Section 3.2) states t
+hat keys used with HMAC-SHA algorithms MUST have a size >= 256 bits (the key size must be greater than or equal to the hash output size).  Consider using the Jwts.SIG.HS256.key() builder (or HS384.key() or HS512.key()) to create a key guaranteed to be secure enough for your preferred HMAC-SHA algorithm.  See https://tools.ietf.org/html/rfc7518#section-3.2 for more information.
+
+```
+
+**Vamos a generar una clave segura**
+
+Para ello modificamos JwtService
+
+
