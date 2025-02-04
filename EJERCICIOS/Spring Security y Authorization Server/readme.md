@@ -286,7 +286,7 @@ Es necesario añadir manualmente la dependencia a **Java JWT**.
 ![alt text](image-9.png)
 
 
-## AuthController
+## AuthController. Probando la autenticación
 
 
 ### POST /auth/register**
@@ -397,3 +397,35 @@ hat keys used with HMAC-SHA algorithms MUST have a size >= 256 bits (the key siz
 Para ello modificamos JwtService
 
 
+## Probando la autorización
+
+### Crear el controlador con un endpoint protegido
+
+```
+
+@RestController
+@RequestMapping("/protegido") // 🔥 Este endpoint estará protegido
+public class ProtectedController {
+
+    @GetMapping
+    public String accessProtectedResource() {
+        // Obtener usuario autenticado
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        return "¡Bienvenido, " + username + "! Has accedido a un recurso protegido.";
+    }
+}
+
+```
+
+### Asegurar que el endpoint requiere autenticación
+
+Añadido al método **securityFilterChain**:
+
+.requestMatchers("/protegido").authenticated() 
+
+
+### Acceder a /protegido con el Token
+
+![alt text](image-15.png)
