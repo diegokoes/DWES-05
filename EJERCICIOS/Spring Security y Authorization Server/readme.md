@@ -11,9 +11,15 @@
 
 ![alt text](image-4.png)
 
+___
+
 ![alt text](image-7.png)
 
 ![alt text](image-8.png)
+
+*Fuente: Udemy - Construye aplicaciones web Spring Framework 6 y Spring Boot 3*
+
+___
 
 https://jwt.io/
 
