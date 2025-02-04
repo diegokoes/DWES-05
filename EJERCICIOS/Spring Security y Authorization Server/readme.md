@@ -407,6 +407,4 @@ Añadido al método **securityFilterChain** de **SecurityConfig**:
 
 ### Acceder a /protegido con el Token
 
-![alt text](image-15.png)
-
 ![alt text](image-16.png)
