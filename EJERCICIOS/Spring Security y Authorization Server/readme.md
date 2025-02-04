@@ -271,13 +271,13 @@ Es necesario añadir manualmente la dependencia a **Java JWT**.
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
             <version>0.12.6</version>
-            <scope>runtime</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-jackson</artifactId>
             <version>0.12.6</version>
-            <scope>runtime</scope>
+            <scope>compile</scope>
         </dependency>
 ```
 
@@ -300,12 +300,73 @@ Es necesario añadir manualmente la dependencia a **Java JWT**.
     - Registra un nuevo usuario en la base de datos.
     - Devuelve un mensaje de éxito.
 
-```
-POST http://localhost:8080/auth/register
-Content-Type: application/json
+Registrar un nuevo usuario:
 
-{
-    "username": "usuario123",
-    "password": "password123"
-}
+![alt text](image-10.png)
+
+Si el usuario ya existe:
+
+![alt text](image-11.png)
+
+## Problemas de dependencias
+
+Un error algo así:
+java.lang.IllegalStateException: JJWT implementation not found! Ensure jjwt-impl is in the classpath.
+
+
+Añadir esta configuración de pluggiin en pom.xml:
+
 ```
+    <build>
+        <plugins>
+            <!-- Plugin de Spring Boot para empaquetar correctamente -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>es.daw.springsecurity.SpringSecurityApplication</mainClass>
+                    <layers>
+                        <enabled>true</enabled>
+                    </layers>
+                </configuration>
+            </plugin>
+
+            <!-- Plugin para copiar las dependencias a target/lib/ -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+```
+
+**Comandos a ejecutar:**
+
+./mvnw clean package
+
+jar tf target/*.jar | findstr jjwt  
+
+![alt text](image-12.png)
+
+![alt text](image-13.png)
+
+jar tf target/SpringSecurity-0.0.1.jar | findstr MANIFEST.MF
+
+
+TENEMOS QUE EJECUTAR POR consola
+
+ava -jar target/myapp.jar
