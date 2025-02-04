@@ -92,8 +92,8 @@ Spring Boot ejecutará automáticamente los scripts SQL ubicados en src/main/res
 
 ```
 -- Crear roles por defecto
-INSERT INTO roles (name) VALUES ('ROLE_USER');
-INSERT INTO roles (name) VALUES ('ROLE_ADMIN');
+INSERT INTO roles (name) VALUES ('USER');
+INSERT INTO roles (name) VALUES ('ADMIN');
 
 -- No vamos a crear usuarios. Se crearán a través de un endpoint
 
