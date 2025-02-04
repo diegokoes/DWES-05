@@ -101,17 +101,8 @@ INSERT INTO users (username, password) VALUES ('admin', '{bcrypt}password');
 INSERT INTO users (username, password) VALUES ('user', '{bcrypt}password');
 
 -- Asignar roles a usuarios
--- Aquí estamos asignando roles a los usuarios mediante la tabla intermedia 'user_roles'
-INSERT INTO user_roles (user_id, role_id) 
-    SELECT u.id, r.id 
-    FROM users u, roles r 
-    WHERE u.username = 'admin' AND r.name = 'ROLE_ADMIN';
-
-INSERT INTO user_roles (user_id, role_id) 
-    SELECT u.id, r.id 
-    FROM users u, roles r 
-    WHERE u.username = 'user' AND r.name = 'ROLE_USER';
-
+INSERT INTO user_roles (user_id, role_id) VALUES (1,2);
+INSERT INTO user_roles (user_id, role_id) VALUES (2,1);
 ```
 
 Pendiente generar contraseñas encriptadas con BCryptPasswordEncoder ....
@@ -233,6 +224,11 @@ Repositorio de usuarios:
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
 }
+
+public interface RoleRepository extends JpaRepository<Role, Long> {
+    Optional<Role> findByName(String name);
+}
+
 ```
 
 ## Implementar el Servicio de Usuarios
@@ -240,6 +236,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 Ahora usaremos el repositorio para cargar usuarios desde la base de datos.
 
 ```
+@Slf4j
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
@@ -252,7 +249,10 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
+                .orElseThrow(() -> {
+                    log.warn("Intento de login con usuario no encontrado: {}", username);
+                    return new UsernameNotFoundException("Usuario no encontrado: " + username);
+                });
     }
 }
 ```
@@ -263,19 +263,9 @@ UsernameNotFoundException es una excepción que forma parte de Spring Security
 HASTA AQUÍ!!!!! 
 
 ![alt text](image-5.png)
-_______
 
-- SecurityConfig.
-- PasswordEnconderConfig
+### Dependencia Java JWT
 
-
-_______
-
-https://www.unlogged.io/post/integrating-jwt-with-spring-security-6-in-spring-boot-3
-
-### Implementación de JwtUtil
-
-Esta clase genera y valida los tokens JWT.
 
 Es necesario añadir manualmente la dependencia a **Java JWT**.
 
@@ -283,238 +273,47 @@ Es necesario añadir manualmente la dependencia a **Java JWT**.
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
-            <version>0.12.3</version>
+            <version>0.12.6</version>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
-            <version>0.12.3</version>
+            <version>0.12.6</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-jackson</artifactId>
-            <version>0.12.3</version>
+            <version>0.12.6</version>
             <scope>runtime</scope>
         </dependency>
-
-
 ```
 
+### Sigue las instrucciones del profesor para montar todas las clases necesarias en el paquete Security
 
-Esta es la clase de utilidades:
+![alt text](image-9.png)
 
-```
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
-import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
+## AuthController
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.Claims;
+**POST /auth/login**
 
-@Component
-public class JwtUtil {
-    private static final String SECRET_KEY = "tu_clave_secreta_super_segura_de_32_bytes_minimo";
+    - Recibe un usuario y contraseña.
+    - Autentica al usuario.
+    - Genera un JWT y lo devuelve en la respuesta.
 
-    private Key getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
-        return Keys.hmacShaKeyFor(keyBytes);
-    }
+**POST /auth/register**
 
-    public String generateToken(String username) {
-        return createToken(new HashMap<>(), username);
-    }
-
-    private String createToken(Map<String, Object> claims, String subject) {
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 hora
-                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
-                .compact();
-    }
-
-    public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
-    }
-
-    public Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
-
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
-    }
-
-    private Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(getSigningKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-    }
-
-    public boolean isTokenValid(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-    }
-
-    private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
-    }
-}
+    - Recibe un usuario y contraseña.
+    - Registra un nuevo usuario en la base de datos.
+    - Devuelve un mensaje de éxito.
 
 ```
+POST http://localhost:8080/auth/register
+Content-Type: application/json
 
-### Implementación de JwtAuthenticationFilter
-
-Este filtro se ejecuta en cada petición para verificar el token JWT:
-
-```
-@Component
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
-    private final JwtUtil jwtUtil;
-    private final UserDetailsService userDetailsService;
-
-    public JwtAuthenticationFilter(JwtUtil jwtUtil, UserDetailsService userDetailsService) {
-        this.jwtUtil = jwtUtil;
-        this.userDetailsService = userDetailsService;
-    }
-
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-            throws ServletException, IOException {
-        String authorizationHeader = request.getHeader("Authorization");
-
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-            chain.doFilter(request, response);
-            return;
-        }
-
-        String token = authorizationHeader.substring(7);
-        String username = jwtUtil.extractUsername(token);
-
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-
-            if (jwtUtil.isTokenValid(token, userDetails)) {
-                UsernamePasswordAuthenticationToken authToken =
-                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(authToken);
-            }
-        }
-
-        chain.doFilter(request, response);
-    }
-}
-```
-
-### Configurar Seguridad con Spring Security
-
-```
-@Configuration
-public class SecurityConfig {
-    private final UserService userService;
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
-
-    public SecurityConfig(UserService userService, JwtAuthenticationFilter jwtAuthenticationFilter) {
-
-        this.userService = userService;
-        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-    }
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/login").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-}
-```
- **SecurityFilterChain:** Configura las reglas de seguridad de la aplicación.
-
-## Crear un endpoint de registro y login
-
-Ahora permitimos a los usuarios registrarse y autenticarse.
-
-```
-@RestController
-@RequestMapping("/auth")
-public class AuthController {
-    private final AuthenticationManager authenticationManager;
-    private final UserRepository userRepository;
-    private final JwtUtil jwtUtil;
-    private final PasswordEncoder passwordEncoder;
-
-    public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, JwtUtil jwtUtil, PasswordEncoder passwordEncoder) {
-        this.authenticationManager = authenticationManager;
-        this.userRepository = userRepository;
-        this.jwtUtil = jwtUtil;
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    @PostMapping("/register")
-    public String register(@RequestBody Map<String, String> request) {
-        User user = new User();
-        user.setUsername(request.get("username"));
-        user.setPassword(passwordEncoder.encode(request.get("password")));
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
-
-        userRepository.save(user);
-        return "Usuario registrado con éxito!";
-    }
-
-    @PostMapping("/login")
-    public Map<String, String> login(@RequestBody Map<String, String> request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                request.get("username"), request.get("password")));
-
-        String token = jwtUtil.generateToken(request.get("username"));
-        return Map.of("token", token);
-    }
-}
-```
-## Verificar que funciona
-
-- Inicia la aplicación y accede a http://localhost:8080/h2-console para ver la base de datos.
-- Registra un usuario con POST /auth/register:
-
-```
 {
-    "username": "admin",
-    "password": "password"
+    "username": "usuario123",
+    "password": "password123"
 }
-
 ```
-- Inicia sesión con POST /auth/login, recibirás un JWT en la respuesta.
-- Usa el JWT para acceder a otros endpoints protegidos.
-
-___
-# Interceptores ?????
