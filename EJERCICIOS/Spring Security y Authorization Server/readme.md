@@ -4,11 +4,14 @@
 
 ![alt text](image-1.png)
 
+
 ## JWT (JSON Web Token)
 
 ![alt text](image-2.png)
 
 ![alt text](image-4.png)
+
+![alt text](image-7.png)
 
 https://jwt.io/
 
