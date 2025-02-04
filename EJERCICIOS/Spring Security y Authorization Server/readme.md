@@ -10,6 +10,29 @@
 
 ![alt text](image-4.png)
 
+https://jwt.io/
+
+![alt text](image-6.png)
+
+
+
+Cuando un usuario haga login (inicie sesión), en vez de trabajar con sesiones, como se hace tradicionalmente, que consume recursos de backend (se genera una cookie, se consume memoria porque ocupa recursos), se genera un token con cierta información (payload).
+
+El token tendrá información no sensible:
+
+- Fecha de generación.
+- Fecha de expedición.
+- Nombre.
+- Email.
+- No tendrá la password...
+
+Esta información se firma con un algoritmo, con una clave privada que solo conoce la apliación de Spring Boot.
+
+Cuando a la aplicación le llega el token, la aplicación intenta decodificarlo con esa clave:
+
+- Si se puede decodificar, el token lo ha creado la apliación y se da acceso.
+- Si no se puede decodificar, no confiamos en él y no se da acceso.
+
 ## Spring Security
 
 ![alt text](image-3.png)
@@ -159,7 +182,7 @@ public class User implements UserDetails {
 
 Spring Security trabaja con un sistema de autenticación basado en **UserDetailsService**, que carga los usuarios desde la base de datos. Al **implementar UserDetails**, tu entidad User es compatible con Spring Security y puedes personalizar la lógica de autenticación y autorización.
 
-Por otro lado, la anotación **@Builder** permite clear objetos con el patrón Builder:
+Por otro lado, la anotación **@Builder** permite crear objetos con el patrón Builder:
 
 ```
 User user = User.builder()
@@ -229,6 +252,12 @@ UsernameNotFoundException es una excepción que forma parte de Spring Security
 HASTA AQUÍ!!!!! 
 
 ![alt text](image-5.png)
+_______
+
+- SecurityConfig.
+- PasswordEnconderConfig
+
+
 _______
 
 https://www.unlogged.io/post/integrating-jwt-with-spring-security-6-in-spring-boot-3
