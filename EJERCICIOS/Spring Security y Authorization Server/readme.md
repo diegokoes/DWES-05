@@ -222,39 +222,11 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
 }
 
 ```
-
-## Implementar el Servicio de Usuarios
-
-Ahora usaremos el repositorio para cargar usuarios desde la base de datos.
-
-```
-@Slf4j
-@Service
-public class UserService implements UserDetailsService {
-    private final UserRepository userRepository;
-
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> {
-                    log.warn("Intento de login con usuario no encontrado: {}", username);
-                    return new UsernameNotFoundException("Usuario no encontrado: " + username);
-                });
-    }
-}
-```
-UsernameNotFoundException es una excepción que forma parte de Spring Security
-
-
+___
 ## NUEVO PAQUETE SECURITY
 
 
-### Dependencia Java JWT
+### Dependencias Java JWT
 
 
 Es necesario añadir manualmente la dependencia a **Java JWT**.
@@ -283,7 +255,7 @@ Es necesario añadir manualmente la dependencia a **Java JWT**.
 
 ![alt text](image-9.png)
 
-
+___
 ## AuthController. Probando la autenticación
 
 
@@ -312,13 +284,15 @@ ___
 ![alt text](image-14.png)
 
 
-**Problemas de dependencias**
+# Posibles problemas de dependencias*
 
-Un error algo así:
-java.lang.IllegalStateException: JJWT implementation not found! Ensure jjwt-impl is in the classpath.
+Si os da un error similar a estos: 
+
+- java.lang.IllegalStateException: JJWT implementation not found! Ensure jjwt-impl is in the classpath.
+- Class could not be found.  Have you remembered to include the jjwt-impl.jar in your runtime classpath?
 
 
-Añadir esta configuración de pluggiin en pom.xml:
+Hay que añadir esta configuración de pluggin en pom.xml:
 
 ```
     <build>
@@ -358,7 +332,7 @@ Añadir esta configuración de pluggiin en pom.xml:
 
 ```
 
-**Comandos a ejecutar:**
+**Comandos a ejecutar para realizar comprobaciones:**
 
 jar tf target/*.jar | findstr jjwt  
 
@@ -372,11 +346,7 @@ Ejecuta:
 ./mvnw clean package
 ```
 
-**TENEMOS QUE EJECUTAR POR consola**
-
-java -jar target/myapp.jar
-
-**Error porque la clave secreta para firmar tokens es demasiado débil**
+## Otro posible error: porque la clave secreta para firmar tokens es demasiado débil**
 
 ```
 2025-02-04 17:03:51 - Secured POST /auth/login
@@ -393,9 +363,17 @@ hat keys used with HMAC-SHA algorithms MUST have a size >= 256 bits (the key siz
 
 **Vamos a generar una clave segura**
 
-Para ello modificamos JwtService
+Para ello modificamos JwtService:
 
+```
+    private final String SECRET_KEY = generateSecureKey().toString();
 
+    private SecretKey generateSecureKey() {
+        return Jwts.SIG.HS256.key().build(); // 🔥 Genera una clave segura de 256 bits
+    }
+```
+
+__
 ## Probando la autorización
 
 ### Crear el controlador con un endpoint protegido
@@ -403,16 +381,18 @@ Para ello modificamos JwtService
 ```
 
 @RestController
-@RequestMapping("/protegido") // 🔥 Este endpoint estará protegido
+@RequestMapping("/protegido") 
 public class ProtectedController {
 
     @GetMapping
     public String accessProtectedResource() {
+
         // Obtener usuario autenticado
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
         return "¡Bienvenido, " + username + "! Has accedido a un recurso protegido.";
+
     }
 }
 
@@ -420,7 +400,7 @@ public class ProtectedController {
 
 ### Asegurar que el endpoint requiere autenticación
 
-Añadido al método **securityFilterChain**:
+Añadido al método **securityFilterChain** de **SecurityConfig**:
 
 .requestMatchers("/protegido").authenticated() 
 
