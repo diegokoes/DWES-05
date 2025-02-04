@@ -250,11 +250,9 @@ public class UserService implements UserDetailsService {
 ```
 UsernameNotFoundException es una excepción que forma parte de Spring Security
 
-## Nuevo paquete security
 
-HASTA AQUÍ!!!!! 
+## NUEVO PAQUETE SECURITY
 
-![alt text](image-5.png)
 
 ### Dependencia Java JWT
 
@@ -362,16 +360,17 @@ Añadir esta configuración de pluggiin en pom.xml:
 
 **Comandos a ejecutar:**
 
-./mvnw clean package
-
 jar tf target/*.jar | findstr jjwt  
 
 ![alt text](image-12.png)
 
 ![alt text](image-13.png)
 
-jar tf target/SpringSecurity-0.0.1.jar | findstr MANIFEST.MF
+Ejecuta:
 
+```
+./mvnw clean package
+```
 
 **TENEMOS QUE EJECUTAR POR consola**
 
