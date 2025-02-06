@@ -1,0 +1,16 @@
+<configuration>
+    <logger name="org.springframework.security" level="TRACE"/>
+    <logger name="org.springframework.web" level="TRACE"/>
+    <logger name="org.springframework.boot" level="INFO"/>
+    <logger name="org.apache.coyote.http11" level="INFO"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
