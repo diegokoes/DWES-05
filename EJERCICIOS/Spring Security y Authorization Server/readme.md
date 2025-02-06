@@ -419,6 +419,26 @@ ___
 
 ![alt text](image-17.png)
 
+El prefijo **ROLE_** es un estándar en Spring Security. Te explico por qué se usa y cómo puedes manejarlo correctamente.
+
+Spring Security, por defecto, espera que los roles de usuario tengan el prefijo ROLE_. 
+
+Algo a tener en cuenta cuando usas anotaciones como @PreAuthorize("hasRole('ADMIN')") o cuando configuras reglas en SecurityConfig con hasRole("ADMIN"). 
+
+Internamente, hasRole("ADMIN") realmente busca "ROLE_ADMIN".
+
+Por ejemplo:
+
+```
+@PreAuthorize("hasRole('ADMIN')")
+public String adminEndpoint() {
+    return "Solo los administradores pueden ver esto";
+}
+
+```
+
+Aquí, aunque especificamos "ADMIN", Spring Security busca "ROLE_ADMIN" internamente.
+
 ___
 
 # Restringir el acceso a métodos basados en expresión regular
