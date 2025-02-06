@@ -412,3 +412,58 @@ Añadido al método **securityFilterChain** de **SecurityConfig**:
 - Authorization → Es la cabecera HTTP estándar para enviar credenciales.
 - Bearer → Indica que se está usando un "Bearer Token" (portador del token).
 - <TOKEN> → Es el JWT generado durante el login.
+
+___
+
+# Mejorar el sistema para permitir registrar usuarios con diferentes roles (ADMIN, USER, etc.).
+
+![alt text](image-17.png)
+
+___
+
+# Restringir el acceso a métodos basados en expresión regular
+
+**@PreAuthorize** es una anotación de Spring Security que permite restringir el acceso a métodos basados en expresiones de seguridad.
+
+Ejemplo básico:
+
+```
+@PreAuthorize("hasRole('ADMIN')")
+public void metodoAdmin() {
+    // Solo los usuarios con el rol ADMIN pueden ejecutar este método
+}
+```
+
+Ejemplo con múltiples roles:
+
+```
+@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+public List<Product> list() {
+    return service.findAll();
+}
+```
+
+## Agregar @EnableMethodSecurity en SecurityConfig
+
+```
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor // Para inyectar las dependencias automáticamente porque crea el constructor de propiedades final
+@EnableMethodSecurity // Habilita @PreAuthorize y @PostAuthorize
+public class SecurityConfig {
+    ...
+}
+```
+
+## Crear el Entity Product
+
+## Crear el ProductRepository
+
+## Crear el ProductService
+
+## Crear el ProductController con Seguridad por Roles
+
+## Asegurar que el JWTService incluye los Roles
+
+## Probar los endpoints con diferentes roles
+
