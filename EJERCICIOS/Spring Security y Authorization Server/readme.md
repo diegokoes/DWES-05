@@ -48,7 +48,9 @@ Cuando a la aplicación le llega el token, la aplicación intenta decodificarlo 
 
 ![alt text](image-3.png)
 
-# Ejemplo Práctico: Implementación de Spring Security con JWT
+__
+
+# EJERCICIO 1: Ejemplo Práctico: Implementación de Spring Security con JWT (Servicio Rest)
 
 ## Crea el proyecto y agregar dependencias
 
@@ -487,3 +489,29 @@ public class SecurityConfig {
 
 ## Probar los endpoints con diferentes roles
 
+___
+
+# EJERCICIO 2: Integrar Spring Security + JWT en una aplicación monolítica con Spring MVC y Thymeleaf
+
+## Pasos
+
+### Configurar Spring Security
+
+- Añadir las dependencias necesarias (spring-boot-starter-security, jjwt).
+- Configurar SecurityConfig para permitir el acceso a ciertas rutas y proteger otras según roles.
+- Crear el modelo de usuario y gestión de roles
+
+### Definir la entidad User y Role con relaciones adecuadas.
+- Crear UserDetailsService para recuperar usuarios de la base de datos.
+- Autenticación con JWT
+
+### Crear un filtro que valide el JWT en cada solicitud.
+- Generar el token al iniciar sesión y devolverlo en la cookie/sesión.
+- Login con Thymeleaf
+
+### Crear un formulario de login con username y password.
+- Autenticar y devolver un JWT al navegador.
+- Proteger rutas y usar JWT para navegación
+
+### Configurar un Interceptor o un filtro para manejar JWT en cada petición.
+Restringir rutas según roles en Spring Security.
