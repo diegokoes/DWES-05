@@ -493,6 +493,34 @@ ___
 
 # EJERCICIO 2: Integrar Spring Security en una aplicación monolítica con Spring MVC y Thymeleaf
 
+En una aplicación Spring MVC típica, en lugar de usar directamente un index.html en src/main/resources/static, se suelen definir vistas en src/main/resources/templates usando tecnologías como Thymeleaf y se configuran en un @Controller o en un @Configuration con WebMvcConfigurer.
+
+Nosotros por ahora hemos usado un @Controller para crear endpoints que redirigen a diferentes plantillas de Thymeleaf.
+
+Un **ejemplo de WebMvcConfigurer** sería este:
+
+```
+@Configuration
+public class MvcConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("home");
+        registry.addViewController("/home").setViewName("home");
+        registry.addViewController("/login").setViewName("login");
+    }
+}
+
+```
+
+La función principal de MvcConfig es registrar controladores de vista sin lógica de negocio a través del método addViewControllers. 
+
+Así evitamos mapear una URL a una vista sin la necesidad de un controlador dedicado.
+
+En el ejemplo trabajado en clase no lo hemos usado.
+
+## Spring Security
+
 Spring Security funciona añadiendo una cadena de filtros a la aplicación. 
 
 Estos filtros interceptan las solicitudes HTTP y aplican reglas de seguridad basadas en la configuración. 
