@@ -421,7 +421,7 @@ ___
 
 ![alt text](image-17.png)
 
-El prefijo **ROLE_** es un estándar en Spring Security. Te explico por qué se usa y cómo puedes manejarlo correctamente.
+El prefijo **ROLE_** es un estándar en Spring Security.
 
 Spring Security, por defecto, espera que los roles de usuario tengan el prefijo ROLE_. 
 
@@ -491,27 +491,29 @@ public class SecurityConfig {
 
 ___
 
-# EJERCICIO 2: Integrar Spring Security + JWT en una aplicación monolítica con Spring MVC y Thymeleaf
+# EJERCICIO 2: Integrar Spring Security en una aplicación monolítica con Spring MVC y Thymeleaf
 
-## Pasos
+Spring Security funciona añadiendo una cadena de filtros a la aplicación. 
 
-### Configurar Spring Security
+Estos filtros interceptan las solicitudes HTTP y aplican reglas de seguridad basadas en la configuración. 
 
-- Añadir las dependencias necesarias (spring-boot-starter-security, jjwt).
-- Configurar SecurityConfig para permitir el acceso a ciertas rutas y proteger otras según roles.
-- Crear el modelo de usuario y gestión de roles
+El enfoque moderno para definir reglas de seguridad en Spring Security es a través del **SecurityFilterChain bean.**
 
-### Definir la entidad User y Role con relaciones adecuadas.
-- Crear UserDetailsService para recuperar usuarios de la base de datos.
-- Autenticación con JWT
+## Control de acceso basado en roles (RBAC)
 
-### Crear un filtro que valide el JWT en cada solicitud.
-- Generar el token al iniciar sesión y devolverlo en la cookie/sesión.
-- Login con Thymeleaf
+En una configuración típica de Spring Security, a los usuarios se les pueden asignar roles como ROLE_USER ROLE_ADMIN. 
 
-### Crear un formulario de login con username y password.
-- Autenticar y devolver un JWT al navegador.
-- Proteger rutas y usar JWT para navegación
+Los recursos y los puntos finales se pueden proteger especificando qué roles tienen acceso a ellos.
 
-### Configurar un Interceptor o un filtro para manejar JWT en cada petición.
-Restringir rutas según roles en Spring Security.
+
+En una aplicación Spring MVC típica, en lugar de usar directamente un index.html en src/main/resources/static, se suelen definir vistas en src/main/resources/templates (Thymeleaf) y se configuran en un @Controller o en un @Configuration con WebMvcConfigurer,
+
+
+## Pasos:
+
+1. En lugar de index.html en static, vamos a usar src/main/resources/templates/home.html
+
+
+
+
+https://spring.io/guides/gs/securing-web
