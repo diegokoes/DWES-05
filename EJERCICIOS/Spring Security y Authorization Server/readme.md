@@ -509,9 +509,15 @@ Los recursos y los puntos finales se pueden proteger especificando qué roles ti
 En una aplicación Spring MVC típica, en lugar de usar directamente un index.html en src/main/resources/static, se suelen definir vistas en src/main/resources/templates (Thymeleaf) y se configuran en un @Controller o en un @Configuration con WebMvcConfigurer,
 
 
-## Pasos:
+## ¿Cómo funciona?
 
-1. En lugar de index.html en static, vamos a usar src/main/resources/templates/home.html
+1. Cuando el usuario envía el formulario de login, Spring Security:
+2. Intercepta la solicitud POST /login
+3. Busca el usuario en la base de datos a través de CustomUserDetailsService
+4. Verifica la contraseña encriptada
+5. Asigna los roles y permisos correspondientes
+6. Redirige al usuario a /home si la autenticación es correcta, o a /login?error=true si falla
+
 
 
 
