@@ -493,9 +493,15 @@ ___
 
 # EJERCICIO 2: Integrar Spring Security en una aplicación monolítica con Spring MVC y Thymeleaf
 
+## Conceptos teóricos
+
 En una aplicación Spring MVC típica, en lugar de usar directamente un index.html en src/main/resources/static, se suelen definir vistas en src/main/resources/templates usando tecnologías como Thymeleaf y se configuran en un @Controller o en un @Configuration con WebMvcConfigurer.
 
-Nosotros por ahora hemos usado un @Controller para crear endpoints que redirigen a diferentes plantillas de Thymeleaf.
+**Nosotros por ahora hemos usado un @Controller para crear endpoints que redirigen a diferentes plantillas de Thymeleaf.**
+
+La función principal de MvcConfig es registrar controladores de vista sin lógica de negocio a través del método addViewControllers. 
+
+Así evitamos mapear una URL a una vista sin la necesidad de un controlador dedicado.
 
 Un **ejemplo de WebMvcConfigurer** sería este:
 
@@ -512,32 +518,37 @@ public class MvcConfig implements WebMvcConfigurer {
 }
 
 ```
+En el ejemplo trabajado en clase no hemos usado WebMvConfigurer. En su lugar hemos creado los endpoints corresopndientes para redirigir:
 
-La función principal de MvcConfig es registrar controladores de vista sin lógica de negocio a través del método addViewControllers. 
+Por ejemplo:
 
-Así evitamos mapear una URL a una vista sin la necesidad de un controlador dedicado.
+```
+    @GetMapping("/login")
+    public String mostrarLogin(){
+        return "login";
+    }
 
-En el ejemplo trabajado en clase no lo hemos usado.
+    @GetMapping("/home")
+    public String mostrarHome(Model model) {
+        return "home";
+    }
+```
 
-## Spring Security
+En la nueva versión del proyecto, trabajaremos con **WebMvcConfigurer**, por simplificar código.
 
-Spring Security funciona añadiendo una cadena de filtros a la aplicación. 
+### Spring Security
 
-Estos filtros interceptan las solicitudes HTTP y aplican reglas de seguridad basadas en la configuración. 
+- Spring Security funciona añadiendo una cadena de filtros a la aplicación. 
+- Estos filtros interceptan las solicitudes HTTP y aplican reglas de seguridad basadas en la configuración. 
+- El enfoque moderno para definir reglas de seguridad en Spring Security es a través del **SecurityFilterChain bean.**
 
-El enfoque moderno para definir reglas de seguridad en Spring Security es a través del **SecurityFilterChain bean.**
+### Control de acceso basado en roles (RBAC)
 
-## Control de acceso basado en roles (RBAC)
-
-En una configuración típica de Spring Security, a los usuarios se les pueden asignar roles como ROLE_USER ROLE_ADMIN. 
-
-Los recursos y los puntos finales se pueden proteger especificando qué roles tienen acceso a ellos.
-
-
-En una aplicación Spring MVC típica, en lugar de usar directamente un index.html en src/main/resources/static, se suelen definir vistas en src/main/resources/templates (Thymeleaf) y se configuran en un @Controller o en un @Configuration con WebMvcConfigurer,
+- En una configuración típica de Spring Security, a los usuarios se les pueden asignar roles como ROLE_USER ROLE_ADMIN. 
+- Los recursos y los puntos finales se pueden proteger especificando qué roles tienen acceso a ellos.
 
 
-## ¿Cómo funciona?
+### ¿Cómo funciona?
 
 1. Cuando el usuario envía el formulario de login, Spring Security:
 2. Intercepta la solicitud POST /login
@@ -546,8 +557,72 @@ En una aplicación Spring MVC típica, en lugar de usar directamente un index.ht
 5. Asigna los roles y permisos correspondientes
 6. Redirige al usuario a /home si la autenticación es correcta, o a /login?error=true si falla
 
+```
+    @GetMapping("/login")
+    public String mostrarLogin(@RequestParam(value = "error", required = false) String error, Model model) {
+        if (error != null) {
+            model.addAttribute("error", "Usuario o contraseña incorrectos. Inténtalo de nuevo.");
+        }
+        return "login";
+    }
+```
 
-
-
+### Para profundizar sobre el tema
 
 https://spring.io/guides/gs/securing-web
+
+https://docs.spring.io/spring-security/reference/index.html
+
+
+___
+
+## Proyecto MVC_Security
+
+He subido a este repositorio un proyecto prototipo.
+
+En base a su diseño, la respuesta a las diferentes urls es el siguiente:
+
+### http://localhost:8080 -> redirige automáticamente a localhost:8080/home
+
+![alt text](image-19.png)
+
+### Antes de iniciar sesión, debo registrarme, ya que no existe ningún usuario en la base de datos
+
+Puedo hacerlo desde el login:
+
+![alt text](image-20.png)
+
+Directamente desde la opción de registro del home:
+
+![alt text](image-21.png)
+
+### Registro
+
+La lista de roles, se están cargando directamente de la base de datos.
+
+![alt text](image-22.png)
+
+### Después del registro, automáticamente puedo iniciar sesión
+
+![alt text](image-23.png)
+
+### Si he hecho login correctamente, puedo acceder a las funcionalidades de productos
+
+#### Como admin
+
+![alt text](image-24.png)
+
+![alt text](image-25.png)
+
+#### Como user
+
+Cierro sesión como admin:
+
+![alt text](image-26.png)
+
+![alt text](image-27.png)
+
+Si intento dar de alta un producto:
+
+![alt text](image-28.png)
+
