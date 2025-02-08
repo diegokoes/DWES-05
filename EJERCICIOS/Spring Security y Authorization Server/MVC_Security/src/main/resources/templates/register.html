@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registro de Usuario</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .register-container {
+            max-width: 400px;
+            margin: auto;
+            margin-top: 50px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .register-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="register-container">
+        <h2 class="register-title">Registro de Usuario</h2>
+        <form th:action="@{/register}" th:object="${user}" method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input id="name" type="text" class="form-control" th:field="*{username}" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" th:field="*{email}" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" th:field="*{password}" required>
+            </div>
+            <div class="mb-3">
+                <label for="role" class="form-label">Rol</label>
+                <select class="form-select" th:field="*{selectedRole}">
+                    <option th:each="role : ${roles}" th:value="${role.name}" th:text="${role.name}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Registrar</button>
+        </form>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
