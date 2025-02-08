@@ -495,9 +495,7 @@ ___
 
 ## Conceptos teóricos
 
-En una aplicación Spring MVC típica, en lugar de usar directamente un index.html en src/main/resources/static, se suelen definir vistas en src/main/resources/templates usando tecnologías como Thymeleaf y se configuran en un @Controller o en un @Configuration con WebMvcConfigurer.
-
-**Nosotros por ahora hemos usado un @Controller para crear endpoints que redirigen a diferentes plantillas de Thymeleaf.**
+En una aplicación Spring MVC típica, **en lugar de usar directamente un index.html en src/main/resources/static**, se suelen definir **vistas en src/main/resources/templates** usando tecnologías como Thymeleaf y se configuran en un @Controller o en un @Configuration con WebMvcConfigurer.
 
 La función principal de MvcConfig es registrar controladores de vista sin lógica de negocio a través del método addViewControllers. 
 
@@ -518,7 +516,9 @@ public class MvcConfig implements WebMvcConfigurer {
 }
 
 ```
-En el ejemplo trabajado en clase no hemos usado WebMvConfigurer. En su lugar hemos creado los endpoints corresopndientes para redirigir:
+En el ejemplo trabajado en clase NO hemos usado WebMvConfigurer. 
+
+En su lugar hemos creado los endpoints corresopndientes para redirigir:
 
 Por ejemplo:
 
@@ -557,6 +557,41 @@ En la nueva versión del proyecto, trabajaremos con **WebMvcConfigurer**, por si
 5. Asigna los roles y permisos correspondientes
 6. Redirige al usuario a /home si la autenticación es correcta, o a /login?error=true si falla
 
+**SecurityConfig:**
+
+```
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/home", "/register","/h2-console/**").permitAll()
+                        .requestMatchers("/productos/nuevo").hasRole("ADMIN")
+                        .requestMatchers("/productos").hasAnyRole("USER", "ADMIN")
+                                //.requestMatchers("/productos/**").authenticated()
+                        .anyRequest().authenticated()
+                )
+                .formLogin(login -> login
+                        .loginPage("/login") //Usa la URL /login como página de autenticación personalizada.
+                        //.defaultSuccessUrl("/productos", true) // Redirige a /productos tras iniciar sesión.
+                        .defaultSuccessUrl("/home", true) // Si el login es exitoso, va a home
+                        .failureUrl("/login?error=true") // Si el login falla, redirige con ?error=true
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout") // Define /logout como la URL para cerrar sesión.
+                        .logoutSuccessUrl("/home") // Tras cerrar sesión, el usuario vuelve a /home.
+                        .permitAll()
+                ) //Cross-Site Request Forgery (CSRF) es un tipo de ataque que engaña a un usuario para que realice acciones en una aplicación web sin su consentimiento o conocimiento
+                .csrf(csrf -> csrf.disable()) //Desactiva protección CSRF, H2-Console lo requiere.
+                .headers(headers -> headers.frameOptions(f -> f.disable()));// frames de h2-console
+
+        return http.build();
+    }
+
+```
+
+
+**AuthController:**
 ```
     @GetMapping("/login")
     public String mostrarLogin(@RequestParam(value = "error", required = false) String error, Model model) {
@@ -585,6 +620,8 @@ En base a su diseño, la respuesta a las diferentes urls es el siguiente:
 ### http://localhost:8080 -> redirige automáticamente a localhost:8080/home
 
 ![alt text](image-19.png)
+
+Si intento ejecutar las funcionalidades de listar y dar de alta un producto, saldrá el formulario de login, ya que no estoy registrado en la aplicación.
 
 ### Antes de iniciar sesión, debo registrarme, ya que no existe ningún usuario en la base de datos
 
@@ -620,9 +657,13 @@ Cierro sesión como admin:
 
 ![alt text](image-26.png)
 
+Spring se encarga de cerrar la sesión. No tengo que implementar nada para hacerlo.
+
 ![alt text](image-27.png)
 
-Si intento dar de alta un producto:
+Si intento dar de alta un producto, no tendré permisos:
 
-![alt text](image-28.png)
+![alt text](image-29.png)
+
+En SecurityConfig se puede usar **exceptionHandling().accessDeniedPage("/error")** para redirigir automáticamente los errores 403 a nuestra página personalizada.
 
