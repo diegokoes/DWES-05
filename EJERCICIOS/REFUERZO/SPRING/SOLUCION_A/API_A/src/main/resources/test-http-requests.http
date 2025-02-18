@@ -1,0 +1,38 @@
+###
+POST http://localhost:8080/events
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluIiwiaWF0IjoxNzM5MzU2MDg3LCJleHAiOjE3MzkzNTk2ODd9.w2p3VJu-OEJxmgmoBghYu3bHLQQmPvwp6vEOrYdPN0I
+Content-Type: application/json
+
+{
+  "codigo": "EV661",
+  "nombre": "Conferencia de Inteligencia Artificial",
+  "lugar": "San Francisco",
+  "fecha": "2025-10-15T09:00:00",
+  "precio": 299.99,
+  "organizador": "/organizadores/1"
+}
+
+###
+POST http://localhost:8080/api/events
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluIiwiaWF0IjoxNzM5MjgyMjUyLCJleHAiOjE3MzkyODU4NTJ9.yPx6_LGtTX61cDvAe3ks_7ljrDkLcYkRnSQIhxAsUAY
+Content-Type: application/json
+
+{
+  "codigo": "EV665",
+  "nombre": "evento prueba",
+  "lugar": "Alcalá",
+  "fecha_publicacion": "2025-10-15T09:00:00",
+  "precio": 200,
+  "organizadorCodigo": "ORG003"
+}
+
+###
+GET http://localhost:8080/eventos
+
+###
+GET http://localhost:8080/organizadores/search/findByCodigo?codigo=ORG001
+
+###
+GET http://localhost:8080/api/eventos/list
+
+###
